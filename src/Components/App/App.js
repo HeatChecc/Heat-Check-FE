@@ -10,7 +10,7 @@ import SideContainer from '../SideContainer/SideContainer';
 const App = () => {
   const [search, setSearch] = useState("")
   const [resturantInApp, setResturantInApp] = useState("")
-  const [dish, setDish] = useState("")
+  // const [dish, setDish] = useState("")
 
   console.log('serach var in app', search)
 

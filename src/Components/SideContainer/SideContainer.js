@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import "./SideContainer.css"
 
 const SideContainer = ({search,resturantInApp}) => {
-    let {id} = useParams();
     //add conidtional rendering to not show resturant button if search is not defined
   return (
     <div>

@@ -18,7 +18,7 @@ const ReviewsContainer = ({setSearch}) => {
       redirect: 'follow'
     };
 
-    fetch(`https://arcane-hollows-12884.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=\"spicy\"&location=\"${id}\"`, requestOptions)
+    fetch(`https://arcane-hollows-12884.herokuapp.com/https://api.yelp.com/v3/businesses/search?term="spicy"&location="${id}"`, requestOptions)
       .then(response => response.json())
       .then(result => {
         setResturants(result.businesses)
@@ -33,7 +33,7 @@ const ReviewsContainer = ({setSearch}) => {
   const resturantCards = resturants.map(resturant => {
     const {name, id, image_url, rating} = resturant
     return <div>
-              <img src={image_url}/>
+              <img src={image_url} alt="restaurant image"/>
               <Link to={`/resturant/${id}`}> {name} </Link>
               <p>{rating}</p>
            </div>
