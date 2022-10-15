@@ -48,7 +48,7 @@ const Resturant = ({search, setResturantInApp}) => {
         setLocation(result.location.display_address[2])
       })
       .catch(error => console.log('error', error));
-  }, [])
+  }, [id])
 
   return (
     <div className='resturantPage'>
