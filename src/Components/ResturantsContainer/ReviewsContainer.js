@@ -3,9 +3,9 @@ import "./ReviewsContainer.css"
 import { useParams } from 'react-router-dom'
 
 const ReviewsContainer = () => {
-  let {id} = useParams();
+  let {lat, long} = useParams();
   return (
-    <div>ReviewsContainer. This will one day do a call utilizing the id:{id}</div>
+    <div>ReviewsContainer. This will one day do a call utilizing the latitude: {lat} and longitude: {long}</div>
   )
 }
 
