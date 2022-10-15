@@ -1,11 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ReviewsContainer.css"
-import { useParams } from 'react-router-dom'
+// import Resturant from '../Resturant/Resturant'
+import { Link, useParams } from 'react-router-dom'
 
 const ReviewsContainer = () => {
-  let {lat, long} = useParams();
+  let {id} = useParams();
+  const [resturants, setResturants] = useState([])
+
+  const fetchResturants = () => {
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer dJEWPcptSi0S89Fq0IOr6VU9OSmNVpfAP-L4Xmr0U3fNtUty7b2PeRmQylJCH_QGk5dcq2lUdlIt-juVbw4De3V9dPToVlq_7lT3kal84w1b3PPz1ytGx1es6vlKY3Yx");
+
+    let raw = "";
+
+    let requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      // body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`https://arcane-hollows-12884.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=\"spicy\"&location=\"${id}\"`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        setResturants(result.businesses)
+      })
+      .catch(error => console.log('error', error));
+  }
+
+  useEffect(() => {
+    fetchResturants()
+  }, [])
+
+  const resturantCards = resturants.map(resturant => {
+    const {name, id, image_url, rating} = resturant
+    return <div>
+              <img src={image_url}/>
+              <Link to={`/resturant/${id}`}> {name} </Link>
+              <p>{rating}</p>
+          </div>
+  })
+
   return (
-    <div>ReviewsContainer. This will one day do a call utilizing the latitude: {lat} and longitude: {long}</div>
+    <div>
+      ReviewsContainer. This will one day do a call utilizing the id: {resturants.length}
+      {resturantCards}
+    </div>
   )
 }
 
