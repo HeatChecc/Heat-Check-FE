@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 import RestaurantCard from '../RestaurantCard/RestaurantCard'
 import Loading from '../Loading/Loading'
 
-const RestaurantsContainer = ({setSearch}) => {
-  let {id} = useParams();
+const RestaurantsContainer = ({ setSearch }) => {
+  let { id } = useParams();
   setSearch(id)
   const [restaurants, setRestaurants] = useState([])
   const [loading, setLoading] = useState(false)
@@ -31,7 +31,7 @@ const RestaurantsContainer = ({setSearch}) => {
   }, [id])
 
   const restaurantsCards = restaurants.map(restaurant => {
-    return(<RestaurantCard restaurant={restaurant} />)
+    return (<RestaurantCard restaurant={restaurant} />)
   })
 
   return (
