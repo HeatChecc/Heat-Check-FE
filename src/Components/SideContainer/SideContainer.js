@@ -7,8 +7,8 @@ const SideContainer = ({search,resturantInApp}) => {
   return (
     <div className='sideBar'>
         <button className='sideButton'><Link className="navigation" to={`/`}>Homepage</Link></button>
-        <button className='sideButton'><Link className="navigation" to={`/search/${search}`}>Resturants</Link></button>
-        <button className='sideButton'><Link className="navigation" to={`/resturant/${resturantInApp}`}>Last Resturant</Link></button>
+        {search && <button className='sideButton'><Link className="navigation" to={`/search/${search}`}>Resturants</Link></button>}
+        {resturantInApp && <button className='sideButton'><Link className="navigation" to={`/resturant/${resturantInApp}`}>Last Resturant</Link></button>}
     </div>
   )
 }
