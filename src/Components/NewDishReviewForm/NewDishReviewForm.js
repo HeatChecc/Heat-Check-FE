@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import fireIcon from '../Images/fire-svgrepo-com.svg'
 import "./NewDishReview.css"
 
 const NewDishReviewForm = ({id, addDish, setShowForm}) => {
   const [dishName, setDishName] = useState('')
   const [description, setDescription] = useState('')
+  const [rating, setRating] = useState(0)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -11,8 +13,8 @@ const NewDishReviewForm = ({id, addDish, setShowForm}) => {
       restaurantId: id,
       dishId: Date.now(),
       name: dishName,
-      reviews: [],
-      description: description
+      description: description,
+      rating: rating
     }
     addDish(newDish)
     setShowForm(false)
@@ -22,6 +24,15 @@ const NewDishReviewForm = ({id, addDish, setShowForm}) => {
     <div>
       NewDishReviewForm
       <form onSubmit={handleSubmit}>
+        <div className='ratingContainer'>
+          <img src={fireIcon} onClick={() => {setRating(1)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(2)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(3)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(4)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(5)}}></img>
+          <p>rating: {rating} </p>
+        </div>
+
         <input
           placeholder='New Dish?'
           value={dishName}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import "./OldDishReviewForm.css"
-
+import fireIcon from '../Images/fire-svgrepo-com.svg'
 
 const OldDishReviewForm = ({oldDishObject, setShowOldForm}) => {
   const [rating, setRating] = useState(0)
@@ -10,12 +10,14 @@ const OldDishReviewForm = ({oldDishObject, setShowOldForm}) => {
     <div>
       OldDishReviewForm
       <form>
-        <select
-          placeholder='Dish Rating...'
-          value={rating}
-          onChange={(event) => setRating(event.target.value)}
-          name='rating'
-        ></select>
+        <div className='ratingContainer'>
+          <img src={fireIcon} onClick={() => {setRating(1)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(2)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(3)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(4)}}></img>
+          <img src={fireIcon} onClick={() => {setRating(5)}}></img>
+          <p>rating: {rating} </p>
+        </div>
 
         <input
           placeholder='Review...'
