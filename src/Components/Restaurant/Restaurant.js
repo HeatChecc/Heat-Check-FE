@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../Header/Header'
 import "./Restaurant.css"
 import { useParams } from 'react-router-dom'
 
@@ -31,7 +30,6 @@ const Restaurant = ({setRestaurantInApp}) => {
 
   return (
     <div className='restaurantPage'>
-      <Header />
       <h2 className='cityName'>{location}</h2> 
       <h1>{restaurant.name}</h1>
       <div className='menuList'>

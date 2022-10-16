@@ -6,6 +6,7 @@ import RestaurantsContainer from '../RestaurantsContainer/RestaurantsContainer'
 import Restaurant from '../Restaurant/Restaurant';
 import Dish from '../Dish/Dish';
 import SideContainer from '../SideContainer/SideContainer';
+import Header from '../Header/Header';
 
 const App = () => {
   const [search, setSearch] = useState("")
@@ -15,6 +16,7 @@ const App = () => {
 
   return (
     <div className="App">
+      {location.pathname !== "/" && <Header/>}
       {location.pathname !== "/" && <SideContainer search={search} restaurantInApp={restaurantInApp}/>}
       <Routes>
         <Route exact path="/" element={<Homepage />}/>
