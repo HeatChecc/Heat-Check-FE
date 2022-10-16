@@ -25,11 +25,11 @@ const NewDishReviewForm = ({id, addDish, setShowForm}) => {
       NewDishReviewForm
       <form onSubmit={handleSubmit}>
         <div className='ratingContainer'>
-          <img src={fireIcon} onClick={() => {setRating(1)}}></img>
-          <img src={fireIcon} onClick={() => {setRating(2)}}></img>
-          <img src={fireIcon} onClick={() => {setRating(3)}}></img>
-          <img src={fireIcon} onClick={() => {setRating(4)}}></img>
-          <img src={fireIcon} onClick={() => {setRating(5)}}></img>
+          <img src={fireIcon} alt='fire1' onClick={() => {setRating(1)}}></img>
+          <img src={fireIcon} alt='fire2' onClick={() => {setRating(2)}}></img>
+          <img src={fireIcon} alt='fire3' onClick={() => {setRating(3)}}></img>
+          <img src={fireIcon} alt='fire4' onClick={() => {setRating(4)}}></img>
+          <img src={fireIcon} alt='fire5' onClick={() => {setRating(5)}}></img>
           <p>rating: {rating} </p>
         </div>
 
