@@ -3,3 +3,37 @@
     color: white;
     height: 100vh;
 }
+
+.cityName {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2%;
+}
+
+.menuHeader {
+    display: flex;
+    align-items: flex-end;
+}
+
+.addNewDishButton {
+    background-color: #780B0B;
+    color: white;
+    height: 40px;
+}
+
+.menuList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menuTitle {
+    padding-right: 520px;
+    text-decoration: underline;
+}
+
+.dishList {
+    height: 500px;
+    width: 900px;
+    border: 1px solid;
+}
