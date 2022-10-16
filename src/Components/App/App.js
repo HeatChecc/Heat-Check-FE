@@ -7,6 +7,7 @@ import Restaurant from '../Restaurant/Restaurant';
 import Dish from '../Dish/Dish';
 import SideContainer from '../SideContainer/SideContainer';
 import Header from '../Header/Header';
+// import NewDishReviewForm from '../NewDishReviewForm/NewDishReviewForm';
 
 const App = () => {
   const [search, setSearch] = useState("")
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/search/:id" element={<RestaurantsContainer setSearch={setSearch}/>}/>
         <Route path="/restaurant/:id" element={<Restaurant setRestaurantInApp={setRestaurantInApp}/>}/>
         <Route path="/dish/:id" element={<Dish />}/>
+        {/* <Route path="/restaurant/newDishForm" element={<NewDishReviewForm/>}/> */}
       </Routes>
     </div>
   );

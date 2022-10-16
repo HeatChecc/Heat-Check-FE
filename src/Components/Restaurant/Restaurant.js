@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import "./Restaurant.css"
 import { useParams } from 'react-router-dom'
+import NewDishReviewForm from '../NewDishReviewForm/NewDishReviewForm';
+import OldDishReviewForm from '../OldDishReviewForm/OldDishReviewForm';
 
-const Restaurant = ({setRestaurantInApp}) => {
-  let {id} = useParams();
+const Restaurant = ({ setRestaurantInApp }) => {
+  let { id } = useParams();
   setRestaurantInApp(id)
   const [restaurant, setRestaurant] = useState("")
   const [location, setLocation] = useState("")
+  const [newDishes, setNewDishes] = useState([])
+  const [showForm, setShowForm] = useState(false)
+  const [showOldForm, setShowOldForm] = useState(false)
+  const [oldDishObject, setOldDishObject] = useState({})
+
+  const addDish = (newDish) => {
+    setNewDishes([...newDishes, newDish])
+  }
 
   useEffect(() => {
     let myHeaders = new Headers();
@@ -28,17 +38,39 @@ const Restaurant = ({setRestaurantInApp}) => {
       .catch(error => console.log('error', error));
   }, [id])
 
+  const dishCard = () => {
+    return newDishes.map(dish => {
+      const oldFormSetUp = () => {
+        setShowOldForm(true)
+        setOldDishObject({
+          dishId: dish.dishId,
+          name: dish.name,
+          dishReviews: [{}]
+        })
+      }
+      return (<div key={dish.dishId}>
+        <div>{dish.name}</div>
+        <div>rating</div>
+        <button onClick={() => oldFormSetUp()}>review</button>
+        <div>{dish.description}</div>
+      </div>)
+    })
+  }
+
   return (
     <div className='restaurantPage'>
-      <h2 className='cityName'>{location}</h2> 
+      <h2 className='cityName'>{location}</h2>
       <h1>{restaurant.name}</h1>
       <div className='menuList'>
         <div className='menuHeader'>
           <h2 className='menuTitle'>Hot Menu</h2>
-          <button className='addNewDishButton'>Add New Dish Review</button>
+          <button className='addNewDishButton' onClick={() => setShowForm(true)}>Add New Dish Review</button>
+          {showForm && <NewDishReviewForm id={id} addDish={addDish} setShowForm={setShowForm} />}
+          {showOldForm && <OldDishReviewForm oldDishObject={oldDishObject} setShowOldForm={setShowOldForm} />}
         </div>
-        <div className='dishList'>
 
+        <div className='dishList'>
+          {dishCard()}
         </div>
       </div>
     </div>
