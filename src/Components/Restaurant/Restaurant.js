@@ -45,6 +45,7 @@ const Restaurant = ({ setRestaurantInApp }) => {
         setOldDishObject({
           dishId: dish.dishId,
           name: dish.name,
+          dishReviews: [{}]
         })
       }
       return (<div key={dish.dishId}>
@@ -64,12 +65,12 @@ const Restaurant = ({ setRestaurantInApp }) => {
         <div className='menuHeader'>
           <h2 className='menuTitle'>Hot Menu</h2>
           <button className='addNewDishButton' onClick={() => setShowForm(true)}>Add New Dish Review</button>
-          {showForm ? <NewDishReviewForm id={id} addDish={addDish} setShowForm={setShowForm} /> : null}
-          {showOldForm ? <OldDishReviewForm oldDishObject={oldDishObject} setShowOldForm={setShowOldForm} /> : null}
+          {showForm && <NewDishReviewForm id={id} addDish={addDish} setShowForm={setShowForm} />}
+          {showOldForm && <OldDishReviewForm oldDishObject={oldDishObject} setShowOldForm={setShowOldForm} />}
         </div>
 
         <div className='dishList'>
-          {newDishes.length && dishCard()}
+          {dishCard()}
         </div>
       </div>
     </div>

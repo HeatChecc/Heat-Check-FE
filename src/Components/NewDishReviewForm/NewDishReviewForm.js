@@ -4,12 +4,14 @@ import "./NewDishReview.css"
 const NewDishReviewForm = ({id, addDish, setShowForm}) => {
   const [dishName, setDishName] = useState('')
   const [description, setDescription] = useState('')
+
   const handleSubmit = (event) => {
     event.preventDefault()
     const newDish = {
       restaurantId: id,
       dishId: Date.now(),
       name: dishName,
+      reviews: [],
       description: description
     }
     addDish(newDish)

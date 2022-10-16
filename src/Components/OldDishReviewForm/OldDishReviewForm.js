@@ -11,7 +11,7 @@ const OldDishReviewForm = ({oldDishObject, setShowOldForm}) => {
       OldDishReviewForm
       <form>
         <select
-          placeholder='Dish Name...'
+          placeholder='Dish Rating...'
           value={rating}
           onChange={(event) => setRating(event.target.value)}
           name='rating'
@@ -23,7 +23,7 @@ const OldDishReviewForm = ({oldDishObject, setShowOldForm}) => {
           onChange={(event) => setDescription(event.target.value)}
           name='description'
         ></input>
-        <button type='submit'>Add New Dish</button>
+        <button type='submit'>Add New Review</button>
       </form>
       </div>
   )
