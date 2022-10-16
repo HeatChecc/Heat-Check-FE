@@ -1,30 +1,29 @@
 import React, { useState } from 'react';
 import Homepage from '../Homepage/Homepage';
 import './App.css';
-import { Route, BrowserRouter, Routes} from "react-router-dom";
-import ResturantsContainer from '../ResturantsContainer/ReviewsContainer'
-import Resturant from '../Resturant/Resturant';
+import { Route, Routes, useLocation} from "react-router-dom";
+import RestaurantsContainer from '../RestaurantsContainer/RestaurantsContainer'
+import Restaurant from '../Restaurant/Restaurant';
 import Dish from '../Dish/Dish';
 import SideContainer from '../SideContainer/SideContainer';
+import Header from '../Header/Header';
 
 const App = () => {
   const [search, setSearch] = useState("")
-  const [resturantInApp, setResturantInApp] = useState("")
+  const [restaurantInApp, setRestaurantInApp] = useState("")
+  const location = useLocation()
   // const [dish, setDish] = useState("")
-
-  console.log('serach var in app', search)
 
   return (
     <div className="App">
-      <BrowserRouter>
-      <SideContainer search={search} resturantInApp={resturantInApp}/>
+      {location.pathname !== "/" && <Header/>}
+      {location.pathname !== "/" && <SideContainer search={search} restaurantInApp={restaurantInApp}/>}
       <Routes>
-      <Route exact path="/" element={<Homepage />}/>
-      <Route path="/search/:id" element={<ResturantsContainer setSearch={setSearch}/>}/>
-      <Route path="/resturant/:id" element={<Resturant search={search} setResturantInApp={setResturantInApp}/>}/>
-      <Route path="/dish/:id" element={<Dish />}/>
+        <Route exact path="/" element={<Homepage />}/>
+        <Route path="/search/:id" element={<RestaurantsContainer setSearch={setSearch}/>}/>
+        <Route path="/restaurant/:id" element={<Restaurant setRestaurantInApp={setRestaurantInApp}/>}/>
+        <Route path="/dish/:id" element={<Dish />}/>
       </Routes>
-      </BrowserRouter>
     </div>
   );
 }
