@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
-import "./Resturant.css"
+import "./Restaurant.css"
 import { useParams } from 'react-router-dom'
 
-const Resturant = ({search, setResturantInApp}) => {
+const Restaurant = ({setRestaurantInApp}) => {
   let {id} = useParams();
-  setResturantInApp(id)
-  const [resturant, setResturant] = useState("")
+  setRestaurantInApp(id)
+  const [restaurant, setRestaurant] = useState("")
   const [location, setLocation] = useState("")
 
   useEffect(() => {
@@ -23,17 +23,17 @@ const Resturant = ({search, setResturantInApp}) => {
       .then(response => response.json())
       .then(result => {
         console.log(result)
-        setResturant(result)
+        setRestaurant(result)
         setLocation(result.location.display_address[2])
       })
       .catch(error => console.log('error', error));
   }, [id])
 
   return (
-    <div className='resturantPage'>
+    <div className='restaurantPage'>
       <Header />
       <h2 className='cityName'>{location}</h2> 
-      <h1>{resturant.name}</h1>
+      <h1>{restaurant.name}</h1>
       <div className='menuList'>
         <div className='menuHeader'>
           <h2 className='menuTitle'>Hot Menu</h2>
@@ -47,4 +47,4 @@ const Resturant = ({search, setResturantInApp}) => {
   )
 }
 
-export default Resturant
+export default Restaurant

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
-import "./ReviewsContainer.css"
+import "./RestaurantsContainer.css"
 import { Link, useParams } from 'react-router-dom'
 
-const ReviewsContainer = ({setSearch}) => {
+const RestaurantsContainer = ({setSearch}) => {
   let {id} = useParams();
   setSearch(id)
-  const [resturants, setResturants] = useState([])
+  const [restaurants, setRestaurants] = useState([])
 
   useEffect(() => {
     let myHeaders = new Headers();
@@ -21,17 +21,17 @@ const ReviewsContainer = ({setSearch}) => {
     fetch(`https://arcane-hollows-12884.herokuapp.com/https://api.yelp.com/v3/businesses/search?term="spicy"&location="${id}"`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        setResturants(result.businesses)
+        setRestaurants(result.businesses)
       })
       .catch(error => console.log('error', error));
   }, [id])
 
-  const resturantCards = resturants.map(resturant => {
-    const {name, id, image_url, rating} = resturant
+  const restaurantCards = restaurants.map(restaurant => {
+    const {name, id, image_url, rating} = restaurant
     return <div key={id} className="restaurant">
               <img className='restaurantImage' src={image_url} alt={name}/>
               <div className='restaurantInfo'>
-                <Link className="restName" to={`/resturant/${id}`}> {name} </Link>
+                <Link className="restName" to={`/restaurant/${id}`}> {name} </Link>
                 <p className='restRating'> Rating: {rating}</p>
               </div>
            </div>
@@ -41,11 +41,11 @@ const ReviewsContainer = ({setSearch}) => {
     <div className='restaurantContainer'>
       <Header/>
       <div className='cardsContainer'>
-        {resturantCards}
+        {restaurantCards}
       </div>
       <div className='emptySpace'></div>
     </div>
   )
 }
 
-export default ReviewsContainer
+export default RestaurantsContainer
