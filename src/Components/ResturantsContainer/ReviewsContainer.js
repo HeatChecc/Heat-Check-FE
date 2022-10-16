@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Header from '../Header/Header'
 import "./ReviewsContainer.css"
 import { Link, useParams } from 'react-router-dom'
 
@@ -27,16 +28,22 @@ const ReviewsContainer = ({setSearch}) => {
 
   const resturantCards = resturants.map(resturant => {
     const {name, id, image_url, rating} = resturant
-    return <div key={id}>
-              <img src={image_url} alt={name}/>
-              <Link to={`/resturant/${id}`}> {name} </Link>
-              <p>{rating}</p>
+    return <div key={id} className="restaurant">
+              <img className='restaurantImage' src={image_url} alt={name}/>
+              <div className='restaurantInfo'>
+                <Link className="restName" to={`/resturant/${id}`}> {name} </Link>
+                <p className='restRating'> Rating: {rating}</p>
+              </div>
            </div>
   })
 
   return (
-    <div>
-      {resturantCards}
+    <div className='restaurantContainer'>
+      <Header/>
+      <div className='cardsContainer'>
+        {resturantCards}
+      </div>
+      <div className='emptySpace'></div>
     </div>
   )
 }
