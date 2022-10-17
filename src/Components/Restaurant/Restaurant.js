@@ -54,7 +54,9 @@ const Restaurant = ({ setRestaurantInApp }) => {
         rating={rating}
         description={description}
         setShowOldForm={setShowOldForm}
+        setShowForm={setShowForm}
         setOldDishObject={setOldDishObject}
+        toggleModal={toggleModal}
       />
     })
 
