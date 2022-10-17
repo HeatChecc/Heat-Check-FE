@@ -3,6 +3,9 @@ import "./Restaurant.css"
 import { useParams } from 'react-router-dom'
 import NewDishReviewForm from '../NewDishReviewForm/NewDishReviewForm';
 import OldDishReviewForm from '../OldDishReviewForm/OldDishReviewForm';
+import DishCard from '../DishCard/DishCard';
+import Modal from "react-modal";
+Modal.setAppElement("#root");
 
 const Restaurant = ({ setRestaurantInApp }) => {
   let { id } = useParams();
@@ -13,9 +16,15 @@ const Restaurant = ({ setRestaurantInApp }) => {
   const [showForm, setShowForm] = useState(false)
   const [showOldForm, setShowOldForm] = useState(false)
   const [oldDishObject, setOldDishObject] = useState({})
+  const [isOpen, setIsOpen] = useState(false);
 
   const addDish = (newDish) => {
     setNewDishes([...newDishes, newDish])
+  }
+
+  const toggleModal = () => {
+    setShowForm(true)
+    setIsOpen(!isOpen);
   }
 
   useEffect(() => {
@@ -38,24 +47,17 @@ const Restaurant = ({ setRestaurantInApp }) => {
       .catch(error => console.log('error', error));
   }, [id])
 
-  const dishCard = () => {
-    return newDishes.map(dish => {
-      const oldFormSetUp = () => {
-        setShowOldForm(true)
-        setOldDishObject({
-          dishId: dish.dishId,
-          name: dish.name,
-          dishReviews: [{}]
-        })
-      }
-      return (<div key={dish.dishId}>
-        <div>{dish.name}</div>
-        <div>rating</div>
-        <button onClick={() => oldFormSetUp()}>review</button>
-        <div>{dish.description}</div>
-      </div>)
+  const dishCards = newDishes.map(dish => {
+      const {dishId, name, rating, description} = dish
+      return <DishCard 
+        key={dishId}
+        name={name}
+        rating={rating}
+        description={description}
+        setShowOldForm={setShowOldForm}
+        setOldDishObject={setOldDishObject}
+      />
     })
-  }
 
   return (
     <div className='restaurantPage'>
@@ -64,13 +66,22 @@ const Restaurant = ({ setRestaurantInApp }) => {
       <div className='menuList'>
         <div className='menuHeader'>
           <h2 className='menuTitle'>Hot Menu</h2>
-          <button className='addNewDishButton' onClick={() => setShowForm(true)}>Add New Dish Review</button>
-          {showForm && <NewDishReviewForm id={id} addDish={addDish} setShowForm={setShowForm} />}
+          <button className='addNewDishButton' onClick={() => toggleModal()}>Add New Dish Review</button>
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+            className="mymodal"
+            overlayClassName="myoverlay"
+            closeTimeoutMS={500}
+          >
+          {showForm && <NewDishReviewForm id={id} addDish={addDish} setShowForm={setShowForm} toggleModal={toggleModal}/>}
           {showOldForm && <OldDishReviewForm oldDishObject={oldDishObject} setShowOldForm={setShowOldForm} />}
+          </Modal>
         </div>
 
         <div className='dishList'>
-          {dishCard()}
+          {dishCards}
         </div>
       </div>
     </div>
