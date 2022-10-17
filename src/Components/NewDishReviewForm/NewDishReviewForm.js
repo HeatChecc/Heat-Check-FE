@@ -47,7 +47,7 @@ const NewDishReviewForm = ({id, addDish, setShowForm, toggleModal}) => {
             onChange={(event) => setDescription(event.target.value)}
             name='description'
           />
-          <button type='submit'>Add New Dish Review</button>
+          <button className="submitNewDishButton" type='submit'>Add New Dish Review</button>
         </div>
       </form>
     </div>
