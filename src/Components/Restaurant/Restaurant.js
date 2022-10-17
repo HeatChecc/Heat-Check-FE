@@ -50,6 +50,7 @@ const Restaurant = ({ setRestaurantInApp }) => {
     const { dishId, name, rating, description } = dish
     return <DishCard
       key={dishId}
+      dishId={dishId}
       name={name}
       rating={rating}
       description={description}
@@ -83,7 +84,8 @@ const Restaurant = ({ setRestaurantInApp }) => {
               toggleModal={toggleModal} />}
             {showOldForm && <OldDishReviewForm
               oldDishObject={oldDishObject}
-              setShowOldForm={setShowOldForm} />}
+              setShowOldForm={setShowOldForm}
+              toggleModal={toggleModal} />}
           </Modal>
         </div>
 
