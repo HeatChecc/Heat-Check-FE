@@ -6,6 +6,16 @@
     height: 100vh;
 }
 
+.inputSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    margin-top: 10px;
+}
+
 .exitContainer {
     display: flex;
 }

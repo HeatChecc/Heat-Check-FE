@@ -10,6 +10,9 @@ const NewDishReviewForm = ({id, addDish, setShowForm, toggleModal}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if (!description || !dishName || !rating) {
+      return
+    }
     const newDish = {
       restaurantId: id,
       dishId: Date.now(),

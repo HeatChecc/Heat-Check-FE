@@ -47,18 +47,18 @@ const Restaurant = ({ setRestaurantInApp }) => {
   }, [id])
 
   const dishCards = newDishes.map(dish => {
-      const {dishId, name, rating, description} = dish
-      return <DishCard 
-        key={dishId}
-        name={name}
-        rating={rating}
-        description={description}
-        setShowOldForm={setShowOldForm}
-        setShowForm={setShowForm}
-        setOldDishObject={setOldDishObject}
-        toggleModal={toggleModal}
-      />
-    })
+    const { dishId, name, rating, description } = dish
+    return <DishCard
+      key={dishId}
+      name={name}
+      rating={rating}
+      description={description}
+      setShowOldForm={setShowOldForm}
+      setShowForm={setShowForm}
+      setOldDishObject={setOldDishObject}
+      toggleModal={toggleModal}
+    />
+  })
 
   return (
     <div className='restaurantPage'>
@@ -76,8 +76,14 @@ const Restaurant = ({ setRestaurantInApp }) => {
             overlayClassName="myoverlay"
             closeTimeoutMS={500}
           >
-          {showForm && <NewDishReviewForm id={id} addDish={addDish} setShowForm={setShowForm} toggleModal={toggleModal}/>}
-          {showOldForm && <OldDishReviewForm oldDishObject={oldDishObject} setShowOldForm={setShowOldForm} />}
+            {showForm && <NewDishReviewForm
+              id={id}
+              addDish={addDish}
+              setShowForm={setShowForm}
+              toggleModal={toggleModal} />}
+            {showOldForm && <OldDishReviewForm
+              oldDishObject={oldDishObject}
+              setShowOldForm={setShowOldForm} />}
           </Modal>
         </div>
 
