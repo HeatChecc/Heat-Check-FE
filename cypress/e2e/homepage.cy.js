@@ -1,5 +1,11 @@
 describe('empty spec', () => {
-  it('passes', () => {
-    cy.visit('localhost:3000')
+  
+  describe('Homepage', () => {
+    beforeEach(() => {
+      cy.visit('localhost:3000')
+    })
+    it('should have a logo', () => {
+      cy.get('.heatCheckLogo').should("exist")
+    })
   })
 })
