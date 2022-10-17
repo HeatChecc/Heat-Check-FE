@@ -3,7 +3,7 @@ import "./DishCard.css"
 // import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import Dish from '../Dish/Dish';
-Modal.setAppElement("#root")
+// Modal.setAppElement("#root")
 
 const DishCard = ({dishId, name, rating, description, setShowOldForm, setOldDishObject, setShowForm, toggleModal}) => {
     const [dishNameClicked, setDishNameClicked] = useState(false)
