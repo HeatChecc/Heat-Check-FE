@@ -63,7 +63,7 @@ const Restaurant = ({ setRestaurantInApp }) => {
   return (
     <div className='restaurantPage'>
       <h2 className='cityName'>{location}</h2>
-      <h1>{restaurant.name}</h1>
+      <h1 className='restaurantName'>{restaurant.name}</h1>
       <div className='menuList'>
         <div className='menuHeader'>
           <h2 className='menuTitle'>Hot Menu</h2>
