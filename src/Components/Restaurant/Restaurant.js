@@ -5,7 +5,6 @@ import NewDishReviewForm from '../NewDishReviewForm/NewDishReviewForm';
 import OldDishReviewForm from '../OldDishReviewForm/OldDishReviewForm';
 import DishCard from '../DishCard/DishCard';
 import Modal from "react-modal";
-Modal.setAppElement("#root");
 
 const Restaurant = ({ setRestaurantInApp }) => {
   let { id } = useParams();
