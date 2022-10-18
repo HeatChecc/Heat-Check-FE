@@ -5,7 +5,19 @@ import "./Homepage.css"
 
 const Homepage = () => {
   const [address, setAddress] = useState("")
+  const [addressError, setAddressError] = useState(false)
   const navigate = useNavigate()
+
+const submitAddress = (event) => {
+  event.preventDefault();
+  setAddressError(false)
+  if (address) {
+    navigate(`/search/${address}`)
+  } else {
+    setAddressError(true)
+  }
+
+}
 
   return (
     <div className='homepage'>
@@ -17,8 +29,9 @@ const Homepage = () => {
           placeholder="Input address"
           onChange={(event) => setAddress(event.target.value)}
         />
-        <button className='searchButton' onClick={() => navigate(`/search/${address}`)}>Search</button>
+        <button className='searchButton' onClick={(e) => submitAddress(e)}>Search</button>
       </form>
+      {addressError && <h2 className='addressErrorMsg'>Please enter a valid city, address or zip code!</h2>}
     </div>
   )
 }

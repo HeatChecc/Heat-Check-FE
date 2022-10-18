@@ -14,5 +14,10 @@ describe('empty spec', () => {
     it('should be able to input information into the field', () => {
       cy.get('input[name="address"]').type('denver').should('have.value', 'denver')
     })
+    it('should fail without an input', () => {
+      cy.get('.addressErrorMsg').should('not.exist')
+      cy.get('.searchButton').click()
+      cy.get('.addressErrorMsg').should('exist')
+    })
   })
 })
