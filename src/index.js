@@ -4,13 +4,35 @@ import './index.css';
 import App from './Components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql} from '@apollo/client'
+
+const client = new ApolloClient({
+  uri: 'https://flyby-gateway.herokuapp.com/',
+  cache: new InMemoryCache(),
+})
+
+client.query({
+    query: gql`
+      query GetLocations {
+        locations {
+          id
+          name
+          description
+          photo
+        }
+      }
+    `,
+  })
+  .then((result) => console.log(result));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ApolloProvider>
   </React.StrictMode>
 );
 
