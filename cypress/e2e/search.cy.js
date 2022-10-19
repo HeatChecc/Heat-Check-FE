@@ -2,7 +2,7 @@ import Search from '../fixtures/Search.json'
 
 describe('The Search Page', () => {
   beforeEach(() => {
-    cy.intercept(`https://arcane-hollows-12884.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=%22spicy%22&location=%22Denver%22`, Search)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Search)
     cy.visit('localhost:3000/search/Denver')
   })
 
@@ -23,15 +23,15 @@ describe('The Search Page', () => {
     cy.get('.restaurant').should("have.length", 20)
   })
 
-  it('Should have Toro as the first resturant', () => {
-    cy.get('.restaurant').first().contains("Toro")
+  it('Should have Himalayan Spice as the first resturant', () => {
+    cy.get('.restaurant').first().contains("Himalayan Spice")
     .get(".restRating").contains("Rating: 4.5")
-    .get(".restaurantImage").first().should('have.attr', 'src').should('include',"https://s3-media1.fl.yelpcdn.com/bphoto/DD9_4p7wAwzx9VbNYMwFTQ/o.jpg")
+    .get(".restaurantImage").first().should('have.attr', 'src').should('include',"https://s3-media2.fl.yelpcdn.com/bphoto/swlTvEXL5yVRzlOPWo4tYw/o.jpg")
   })
 
-  it('should have b.b.q chicken as the last resturant', () => {
-    cy.get(".restaurant").last().contains("bb.q Chicken - Capitol Hill Denver")
+  it("should have Mehak India's Aroma as the last resturant", () => {
+    cy.get(".restaurant").last().contains("Mehak India's Aroma")
     .get(".restRating").contains("Rating: 4.5")
-    .get(".restaurantImage").last().should('have.attr', 'src').should('include',"https://s3-media3.fl.yelpcdn.com/bphoto/x6_dXMxOUoYm5ziY1b5sCA/o.jpg")
+    .get(".restaurantImage").last().should('have.attr', 'src').should('include',"https://s3-media1.fl.yelpcdn.com/bphoto/CzbzAT1SD9exma35ESPBUQ/o.jpg")
   })
 })

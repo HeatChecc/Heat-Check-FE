@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import {gql, useQuery} from '@apollo/client'
 import "./RestaurantsContainer.css"
 import { useParams } from 'react-router-dom'
 import RestaurantCard from '../RestaurantCard/RestaurantCard'
@@ -7,38 +7,38 @@ import Loading from '../Loading/Loading'
 const RestaurantsContainer = ({ setSearch }) => {
   let { id } = useParams();
   setSearch(id)
-  const [restaurants, setRestaurants] = useState([])
-  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    setLoading(true)
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer dJEWPcptSi0S89Fq0IOr6VU9OSmNVpfAP-L4Xmr0U3fNtUty7b2PeRmQylJCH_QGk5dcq2lUdlIt-juVbw4De3V9dPToVlq_7lT3kal84w1b3PPz1ytGx1es6vlKY3Yx");
+  const GET_RESTAURANTS = gql`
+    query Restaurants($location: String! ) {
+      restaurants(location: $location) {
+        id
+        imageUrl
+        name
+        rating
+        address
+        lat
+        lon
+        city
+      }
+    }
+    `;
 
-    let requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
+  function DisplayRestaurants() {
+    const { loading, error, data } = useQuery(GET_RESTAURANTS, {variables: {location: id}});
+  
+    if (loading) return <Loading />;
+    if (error) return <p>Error :(</p>;
+  
+    return data.restaurants.map((restaurant) => (
+      <RestaurantCard restaurant={restaurant} />
+    ));
+  }
 
-    fetch(`https://arcane-hollows-12884.herokuapp.com/https://api.yelp.com/v3/businesses/search?term="spicy"&location="${id}"`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        setLoading(false)
-        setRestaurants(result.businesses)
-      })
-      .catch(error => console.log('error', error));
-  }, [id])
-
-  const restaurantsCards = restaurants.map(restaurant => {
-    return (<RestaurantCard restaurant={restaurant} />)
-  })
 
   return (
     <div className='restaurantContainer'>
-      {loading && <Loading />}
       <div className='cardsContainer'>
-        {restaurantsCards}
+        <DisplayRestaurants />
       </div>
       <div className='emptySpace'></div>
     </div>
