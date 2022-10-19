@@ -17,7 +17,7 @@ const Dish = ({name, toggleDishModal, setDishNameClicked}) => {
       Dish page. This will one day do a call using the id: {id}
       <h2 className='dishName'>{name}</h2>
       <button className='backButton' onClick={() => setDefault()}>Go Back</button>
-      <h2>Customer Reviews</h2>
+      <h2 className='reviewsHeader'>Customer Reviews</h2>
       <div className='reviewsContainer'>
 
       </div>

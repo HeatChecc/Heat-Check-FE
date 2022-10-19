@@ -1,3 +1,4 @@
+import { getByPlaceholderText } from '@testing-library/react'
 import Restaurant from '../fixtures/Restaurant.json'
 describe('The Single Restaurant Page', () => {
   beforeEach(() => {
@@ -52,6 +53,31 @@ describe('The Single Restaurant Page', () => {
     .get('input[name="dishName"]').type('Chicken Masala').should('have.value', 'Chicken Masala')
     .get('input[name="description"]').type('It burned twice').should('have.value', 'It burned twice')
     .get(".submitNewDishButton").click()
+    .get(".dishCardInfo").should('have.length', 1)
+  })
+
+  it("should be able to see a dish's details in more depth", () => {
+    cy.get(".addNewDishButton").click()
+    .get(".fire").last().click()
+    .get(".spiceRating").contains("rating: 5")
+    .get('input[name="dishName"]').type('Chicken Masala').should('have.value', 'Chicken Masala')
+    .get('input[name="description"]').type('It burned twice').should('have.value', 'It burned twice')
+    .get(".submitNewDishButton").click()
+    .get(".dishName").click()
+    .get(".backButton").should("exist")
+    .get(".reviewsHeader").contains("Customer Reviews")
+  })
+
+  it("should be able to go back to the restuant view when in the dish details", () => {
+    cy.get(".addNewDishButton").click()
+    .get(".fire").last().click()
+    .get(".spiceRating").contains("rating: 5")
+    .get('input[name="dishName"]').type('Chicken Masala').should('have.value', 'Chicken Masala')
+    .get('input[name="description"]').type('It burned twice').should('have.value', 'It burned twice')
+    .get(".submitNewDishButton").click()
+    .get(".dishName").click()
+    .get(".backButton").click()
+    .get(".backButton").should('not.exist')
     .get(".dishCardInfo").should('have.length', 1)
   })
 
