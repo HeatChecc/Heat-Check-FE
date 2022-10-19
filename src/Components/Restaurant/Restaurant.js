@@ -72,7 +72,7 @@ const Restaurant = ({ setRestaurantInApp }) => {
   
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
-  
+    console.log(data)
     return(
       <>
         <h2 className='cityName'>{data.restaurant.address}</h2>
