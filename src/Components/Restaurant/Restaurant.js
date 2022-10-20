@@ -35,9 +35,12 @@ const Restaurant = ({ setRestaurantInApp }) => {
       dishes {
         id
         name
-        cuisineType
         yelpId
         spiceRating
+        reviews {
+          id
+          description
+          }
         }
       }
     }
@@ -53,13 +56,13 @@ const Restaurant = ({ setRestaurantInApp }) => {
   }
 
   const dishCards = newDishes.map(dish => {
-    const { dishId, name, rating, description } = dish
+    const { dishId, name, rating, reviewcheck, reviews } = dish
     return <DishCard
       key={dishId}
       dishId={dishId}
       name={name}
       rating={rating}
-      description={description}
+      description={reviewcheck}
       setShowOldForm={setShowOldForm}
       setShowForm={setShowForm}
       setOldDishObject={setOldDishObject}
@@ -72,7 +75,7 @@ const Restaurant = ({ setRestaurantInApp }) => {
   
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
-    console.log(data)
+    setNewDishes(data.restaurant.dishes)
     return(
       <>
         <h2 className='cityName'>{data.restaurant.address}</h2>
