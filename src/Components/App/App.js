@@ -12,7 +12,7 @@ import Header from '../Header/Header';
 const App = () => {
   const [search, setSearch] = useState("")
   const [restaurantInApp, setRestaurantInApp] = useState("")
-  const [user, setUser] = useState({"user":{"id":"1","email":"eli@eli.com","username":"PHIL","__typename":"User"}})
+  const [user] = useState({"user":{"id":"1","email":"eli@eli.com","username":"PHIL","__typename":"User"}})
   const location = useLocation()
   // const [dish, setDish] = useState("")
 

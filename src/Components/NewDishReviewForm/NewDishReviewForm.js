@@ -29,7 +29,7 @@ function Form() {
   const [dishName, setDishName] = useState('')
   // const [description, setDescription] = useState('')
   const [rating, setRating] = useState(0)
-  const [addDish, { loading, error, data }] = useMutation(ADD_DISH, {
+  const [addDish, { loading, error}] = useMutation(ADD_DISH, {
     refetchQueries: [
       {query: getRestaurant,
         variables:{
