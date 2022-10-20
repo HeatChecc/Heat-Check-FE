@@ -9,16 +9,16 @@ describe('The Single Restaurant Page', () => {
         delay: 1000,
         fixture: 'User.json'
       });
-    })
+    }).as('getUser')
     cy.intercept({method: 'POST', url: 'https://heatcheck-be.herokuapp.com/graphql', times: 1}, (req) => {
       req.reply({
         delay: 1000,
         fixture: 'Restaurant.json'
       });
-    })
+    }).as('getRest')
     // cy.intercept('https://heatcheck-be.herokuapp.com/graphql', User).as('getUser')
     cy.visit('localhost:3000/restaurant/Ttk8uzixI-qX8LhdHINV9A')
-    cy.wait(4000)
+    cy.wait(3000)
   })
   
   it('should have a restaurant name', () => {

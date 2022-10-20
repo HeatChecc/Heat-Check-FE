@@ -7,16 +7,16 @@ describe('The Search Page', () => {
         delay: 1000,
         fixture: 'User.json'
       });
-    })
+    }).as('getUser')
     cy.intercept({method: 'POST', url: 'https://heatcheck-be.herokuapp.com/graphql', times: 1}, (req) => {
       req.reply({
         delay: 1000,
         fixture: 'Search.json'
       });
-    })
+    }).as('getSearch')
     // cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Search)
     cy.visit('localhost:3000/search/Denver')
-    cy.wait(4000)
+    cy.wait(3000)
   })
 
   it('should have a header', () => {
