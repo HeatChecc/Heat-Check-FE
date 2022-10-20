@@ -16,7 +16,6 @@ const submitAddress = (event) => {
   } else {
     setAddressError(true)
   }
-
 }
 
   return (
