@@ -2,7 +2,19 @@ import Search from '../fixtures/Search.json'
 
 describe('The Search Page', () => {
   beforeEach(() => {
-    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Search)
+    cy.intercept({method: 'POST', url: 'https://heatcheck-be.herokuapp.com/graphql', times: 1}, (req) => {
+      req.reply({
+        delay: 1000,
+        fixture: 'User.json'
+      });
+    })
+    cy.intercept({method: 'POST', url: 'https://heatcheck-be.herokuapp.com/graphql', times: 1}, (req) => {
+      req.reply({
+        delay: 1000,
+        fixture: 'Search.json'
+      });
+    }).wait(3000)
+    // cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Search)
     cy.visit('localhost:3000/search/Denver')
   })
 

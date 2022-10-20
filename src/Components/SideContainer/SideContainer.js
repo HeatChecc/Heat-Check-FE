@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import "./SideContainer.css"
 
-const SideContainer = ({search,restaurantInApp}) => {
+const SideContainer = ({search,restaurantInApp, user}) => {
   // const [user, setUser] = useState("1")
 
   const GET_USER = gql`

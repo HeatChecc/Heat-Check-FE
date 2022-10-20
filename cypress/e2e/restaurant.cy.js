@@ -1,17 +1,34 @@
 import { getByPlaceholderText } from '@testing-library/react'
 import Restaurant from '../fixtures/Restaurant.json'
+import User from '../fixtures/User.json'
 describe('The Single Restaurant Page', () => {
   beforeEach(() => {
-    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant)
+    // cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant).as('getRest')
+    cy.intercept({method: 'POST', url: 'https://heatcheck-be.herokuapp.com/graphql', times: 1}, (req) => {
+      req.reply({
+        delay: 1000,
+        fixture: 'User.json'
+      });
+    })
+    cy.intercept({method: 'POST', url: 'https://heatcheck-be.herokuapp.com/graphql', times: 1}, (req) => {
+      req.reply({
+        delay: 1000,
+        fixture: 'Restaurant.json'
+      });
+    }).wait(3000)
+    // cy.intercept('https://heatcheck-be.herokuapp.com/graphql', User).as('getUser')
     cy.visit('localhost:3000/restaurant/Ttk8uzixI-qX8LhdHINV9A')
+    // cy.wait(3000)
   })
-
+  
   it('should have a restaurant name', () => {
     cy.get('.restaurantName').contains("Toro")
+    // cy.wait('@getRest')
+    // cy.wait('@userGet')
   })
 
   it('should have the city name of the restaurant', () => {
-    cy.get(".cityName").contains("Denver, CO 77777")
+    cy.get(".cityName").contains("150 Clayton Ln, Ste B, Denver, CO 77777")
   })
 
   it("Should have a empty menu", () => {
