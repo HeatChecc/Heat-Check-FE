@@ -18,7 +18,7 @@ describe('The Single Restaurant Page', () => {
     }).as('getRest')
     // cy.intercept('https://heatcheck-be.herokuapp.com/graphql', User).as('getUser')
     cy.visit('localhost:3000/restaurant/Ttk8uzixI-qX8LhdHINV9A')
-    cy.wait(3000)
+    // cy.wait(3000)
   })
   
   it('should have a restaurant name', () => {
@@ -61,6 +61,7 @@ describe('The Single Restaurant Page', () => {
     .get('input[name="dishName"]')
     .get('input[name="description"]')
     .get(".submitNewDishButton").contains("Add New Dish Review")
+    cy.wait('@getUser')
   })
 
   it("should be able to add a new dish review", () => {
