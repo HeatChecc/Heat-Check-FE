@@ -56,7 +56,7 @@ const Restaurant = ({ setRestaurantInApp }) => {
   }
 
   const dishCards = newDishes.map(dish => {
-    const { dishId, name, rating, reviewcheck, reviews } = dish
+    const { dishId, name, rating, reviewcheck } = dish
     return <DishCard
       key={dishId}
       dishId={dishId}
