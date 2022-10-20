@@ -16,6 +16,8 @@ describe('The Search Page', () => {
     }).as('getSearch')
     // cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Search)
     cy.visit('localhost:3000/search/Denver')
+    cy.wait('@getUser')
+    cy.wait('@getSearch')
     // cy.wait(3000)
   })
 
@@ -26,16 +28,16 @@ describe('The Search Page', () => {
   })
 
   it('should have a sidebar', () => {
+    // cy.wait('@getUser')
     cy.get(".sideBar")
     .get(".sideButton").should("have.length", 2)
     .get(".sideButton").first().contains("Homepage")
     .get(".sideButton").last().contains("Restaurants")
-    cy.wait('@getUser')
   })
 
   it('should have 20 restaurants', () => {
+    // cy.wait('@getSearch')
     cy.get('.restaurant').should("have.length", 20)
-    cy.wait('@getSearch')
   })
 
   it('Should have Himalayan Spice as the first resturant', () => {

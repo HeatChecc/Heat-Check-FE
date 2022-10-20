@@ -18,13 +18,14 @@ describe('The Single Restaurant Page', () => {
     }).as('getRest')
     // cy.intercept('https://heatcheck-be.herokuapp.com/graphql', User).as('getUser')
     cy.visit('localhost:3000/restaurant/Ttk8uzixI-qX8LhdHINV9A')
-    // cy.wait(3000)
+    cy.wait('@getUser')
+    cy.wait('@getRest')
   })
   
   it('should have a restaurant name', () => {
-    cy.get('.restaurantName').contains("Toro")
     // cy.wait('@getRest')
-    // cy.wait('@userGet')
+    cy.get('.restaurantName').contains("Toro")
+    // cy.wait('@getUser')
   })
 
   it('should have the city name of the restaurant', () => {
@@ -54,6 +55,7 @@ describe('The Single Restaurant Page', () => {
   })
 
   it('should be able to see a form to add a new dish', () => {
+    // cy.wait('@getRest')
     cy.get(".addNewDishButton").click()
     .get(".exitModalImage").should("exist")
     .get(".fire").should('have.length', 5)
@@ -61,7 +63,7 @@ describe('The Single Restaurant Page', () => {
     .get('input[name="dishName"]')
     .get('input[name="description"]')
     .get(".submitNewDishButton").contains("Add New Dish Review")
-    cy.wait('@getUser')
+    // cy.wait('@getUser')
   })
 
   it("should be able to add a new dish review", () => {
@@ -100,8 +102,10 @@ describe('The Single Restaurant Page', () => {
   })
 
   it("should be able to exit the form if the user doesn't want to add a review", () => {
+    // cy.wait('@getRest')
     cy.get(".addNewDishButton").click()
     .get(".exitModalImage").click()
     .get(".exitModalImage").should('not.exist')
+    // cy.wait('@getUser')
   })
 })
