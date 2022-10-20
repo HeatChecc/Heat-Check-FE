@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { gql, useQuery} from '@apollo/client'
 import "./Restaurant.css"
 import { useParams } from 'react-router-dom'
@@ -8,7 +8,7 @@ import DishCard from '../DishCard/DishCard';
 import Modal from "react-modal";
 import Loading from '../Loading/Loading'
 
-const Restaurant = ({ setRestaurantInApp }) => {
+const Restaurant = ({ setRestaurantInApp, user }) => {
   let { id } = useParams();
   setRestaurantInApp(id)
   const [newDishes, setNewDishes] = useState([])
@@ -16,6 +16,8 @@ const Restaurant = ({ setRestaurantInApp }) => {
   const [showOldForm, setShowOldForm] = useState(false)
   const [oldDishObject, setOldDishObject] = useState({})
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log('new dishes', newDishes)
 
   const GET_RESTAURANT = gql`
   query Restaurant($yelp_id: String! ) {
@@ -38,12 +40,16 @@ const Restaurant = ({ setRestaurantInApp }) => {
         cuisineType
         yelpId
         spiceRating
+        reviews {
+          id
+          description
+          }
         }
       }
     }
   `;
 
-  const addDish = (newDish) => {
+  const addDishToArray = (newDish) => {
     setNewDishes([...newDishes, newDish])
   }
 
@@ -72,7 +78,8 @@ const Restaurant = ({ setRestaurantInApp }) => {
   
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
-    console.log(data)
+    setNewDishes(data.restaurant.dishes)
+    // console.log('dtata', data)
     return(
       <>
         <h2 className='cityName'>{data.restaurant.address}</h2>
@@ -91,11 +98,15 @@ const Restaurant = ({ setRestaurantInApp }) => {
             >
               {showForm && <NewDishReviewForm
                 id={id}
-                addDish={addDish}
+                user={user}
+                addDishToArray={addDishToArray}
                 setShowForm={setShowForm}
+                category={data.restaurant.categories}
+                getRestaurant={GET_RESTAURANT}
                 toggleModal={toggleModal} />}
               {showOldForm && <OldDishReviewForm
                 oldDishObject={oldDishObject}
+                user={user}
                 setShowOldForm={setShowOldForm}
                 toggleModal={toggleModal} />}
             </Modal>
