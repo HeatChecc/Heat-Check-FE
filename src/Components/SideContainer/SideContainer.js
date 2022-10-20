@@ -1,11 +1,11 @@
-import React, {useState}from 'react'
+import React from 'react'
 import {gql, useQuery} from '@apollo/client'
 import { Link } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import "./SideContainer.css"
 
 const SideContainer = ({search,restaurantInApp}) => {
-  const [user, setUser] = useState("1")
+  // const [user, setUser] = useState("1")
 
   const GET_USER = gql`
   query {
@@ -22,7 +22,7 @@ const SideContainer = ({search,restaurantInApp}) => {
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
     console.log(data)
-    setUser(data)
+    // setUser(data)
     return data.user.username.toUpperCase()
   }
     //add conidtional rendering to not show restaurant button if search is not defined
