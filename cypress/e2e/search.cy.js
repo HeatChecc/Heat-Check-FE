@@ -16,7 +16,7 @@ describe('The Search Page', () => {
     })
     // cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Search)
     cy.visit('localhost:3000/search/Denver')
-    cy.wait(3000)
+    cy.wait(4000)
   })
 
   it('should have a header', () => {
