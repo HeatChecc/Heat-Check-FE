@@ -1,26 +1,54 @@
 import React, { useState } from 'react'
 import fireIcon from '../Images/fire-svgrepo-com.svg'
 import bathroomLogo from "../Images/gotta-go.png"
+import { gql, useMutation} from '@apollo/client'
+import Loading from '../Loading/Loading'
 import "./NewDishReview.css"
 
-const NewDishReviewForm = ({id, addDish, setShowForm, toggleModal}) => {
+const NewDishReviewForm = ({id, addDishToArray, setShowForm, toggleModal, user, category, getRestaurant}) => {
+  console.log('rest', getRestaurant)
+
+  const ADD_DISH = gql`
+  mutation AddDish($name: String!, $cuisineType: String!, $yelpId: String!, $spiceRating: Int!){
+    dish: createDish(
+      input: {
+        name: $name
+        cuisineType: $cuisineType
+        yelpId: $yelpId
+        spiceRating: $spiceRating
+      }
+    ) {
+      name
+      cuisineType
+      yelpId
+      spiceRating
+    }
+  }
+  `
+function Form() {
   const [dishName, setDishName] = useState('')
-  const [description, setDescription] = useState('')
+  // const [description, setDescription] = useState('')
   const [rating, setRating] = useState(0)
+  const [addDish, { loading, error}] = useMutation(ADD_DISH, {
+    refetchQueries: [
+      {query: getRestaurant,
+        variables:{
+          yelp_id: id
+        }}
+    ],
+  })
+
+  if (loading) return <Loading />;
+  if (error) return <p>Error :(</p>;
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if (!description || !dishName || !rating) {
-      return
-    }
-    const newDish = {
-      restaurantId: id,
-      dishId: Date.now(),
+    addDish({ variables: {
       name: dishName,
-      description: description,
-      rating: rating
-    }
-    addDish(newDish)
+      cuisineType: category,
+      yelpId: id,
+      spiceRating: rating
+    }})
     setShowForm(false)
     toggleModal()
   }
@@ -44,17 +72,19 @@ const NewDishReviewForm = ({id, addDish, setShowForm, toggleModal}) => {
             onChange={(event) => setDishName(event.target.value)}
             name='dishName'
           />
-          <input
-            placeholder='How hot was it?'
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-            name='description'
-          />
           <button className="submitNewDishButton" type='submit'>Add New Dish Review</button>
         </div>
       </form>
     </div>
   )
+}
+
+return (
+  <div>
+    <Form/>
+  </div>
+)
+
 }
 
 export default NewDishReviewForm

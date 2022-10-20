@@ -3,7 +3,7 @@ import "./OldDishReviewForm.css"
 import fireIcon from '../Images/fire-svgrepo-com.svg'
 import bathroomLogo from "../Images/gotta-go.png"
 
-const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal }) => {
+const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal, user }) => {
   const [rating, setRating] = useState(0)
   const [description, setDescription] = useState('')
 
