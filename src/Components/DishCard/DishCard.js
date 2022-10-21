@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import Dish from '../Dish/Dish';
 // Modal.setAppElement("#root")
 
-const DishCard = ({dishId, name, rating, description, setShowOldForm, setOldDishObject, setShowForm, toggleModal}) => {
+const DishCard = ({dishId, name, rating, description, setShowOldForm, setOldDishObject, setShowForm, toggleModal, getDishReviews}) => {
     const [dishNameClicked, setDishNameClicked] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
 
@@ -24,8 +24,6 @@ const DishCard = ({dishId, name, rating, description, setShowOldForm, setOldDish
         setIsOpen(!isOpen);
       }
 
-    // console.log('clicked?', dishNameClicked)
-
     return (
         <div className='dishCardInfo'>
         <Modal
@@ -36,7 +34,7 @@ const DishCard = ({dishId, name, rating, description, setShowOldForm, setOldDish
             overlayClassName="myoverlay"
             closeTimeoutMS={500}
           >
-            {dishNameClicked && <Dish name={name} toggleDishModal={toggleDishModal} setDishNameClicked={setDishNameClicked}/>}
+            {dishNameClicked && <Dish dishId={dishId} name={name} toggleDishModal={toggleDishModal} setDishNameClicked={setDishNameClicked} getDishReviews={getDishReviews}/>}
         </Modal>
             <div className='dishTopInfo'>
                 <h2 className='dishName' onClick={() => toggleDishModal()}>{name}</h2>

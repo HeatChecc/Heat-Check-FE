@@ -49,6 +49,25 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
     }
   `;
 
+  const GET_DISH_REVIEWS = gql`
+  query Dish($id: ID! ) {
+    dish(id: $id) {
+      id
+      name
+      cuisineType
+      yelpId
+      spiceRating
+      reviews {
+        id
+        description
+        overallRating
+        userId
+        dishId
+      }
+    }
+  }
+  `;
+
   const addDishToArray = (newDish) => {
     setNewDishes([...newDishes, newDish])
   }
@@ -59,10 +78,10 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   }
 
   const dishCards = newDishes.map(dish => {
-    const { dishId, name, rating, description } = dish
+    const { id, name, rating, description } = dish
     return <DishCard
-      key={dishId}
-      dishId={dishId}
+      key={id}
+      dishId={id}
       name={name}
       rating={rating}
       description={description}
@@ -70,6 +89,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
       setShowForm={setShowForm}
       setOldDishObject={setOldDishObject}
       toggleModal={toggleModal}
+      getDishReviews={GET_DISH_REVIEWS}
     />
   })
 
@@ -79,7 +99,6 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
     setNewDishes(data.restaurant.dishes)
-    // console.log('dtata', data)
     return(
       <>
         <h2 className='cityName'>{data.restaurant.address}</h2>
@@ -105,9 +124,11 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
                 getRestaurant={GET_RESTAURANT}
                 toggleModal={toggleModal} />}
               {showOldForm && <OldDishReviewForm
+                id={id}
                 oldDishObject={oldDishObject}
                 user={user}
                 setShowOldForm={setShowOldForm}
+                getDishReviews={GET_DISH_REVIEWS}
                 toggleModal={toggleModal} />}
             </Modal>
           </div>
