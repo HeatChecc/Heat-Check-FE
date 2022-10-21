@@ -18,6 +18,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   console.log('new dishes', newDishes)
+  console.log('id21', id)
 
   const GET_RESTAURANT = gql`
   query Restaurant($yelp_id: String! ) {
@@ -78,10 +79,10 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   }
 
   const dishCards = newDishes.map(dish => {
-    const { id, name, rating, description } = dish
+    const { name, rating, description } = dish
     return <DishCard
-      key={id}
-      dishId={id}
+      key={dish.id}
+      dishId={dish.id}
       name={name}
       rating={rating}
       description={description}
@@ -90,6 +91,8 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
       setOldDishObject={setOldDishObject}
       toggleModal={toggleModal}
       getDishReviews={GET_DISH_REVIEWS}
+      getRestaurant={GET_RESTAURANT}
+      restaurantId={id}
     />
   })
 
