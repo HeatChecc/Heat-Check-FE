@@ -12,20 +12,20 @@ import Header from '../Header/Header';
 const App = () => {
   const [search, setSearch] = useState("")
   const [restaurantInApp, setRestaurantInApp] = useState("")
-  const [user] = useState({"user":{"id":"1","email":"eli@eli.com","username":"PHIL","__typename":"User"}})
+  const [user, setUser] = useState({})
+  const [signIn, setSignIn] = useState(false)
   const location = useLocation()
   // const [dish, setDish] = useState("")
 
   return (
     <div className="App">
-      {location.pathname !== "/" && <Header/>}
-      {location.pathname !== "/" && <SideContainer search={search} restaurantInApp={restaurantInApp} username={user.user.username}/>}
+      <Header signIn={signIn} setSignIn={setSignIn} setUser={setUser} />
+      {location.pathname !== "/" && <SideContainer search={search} restaurantInApp={restaurantInApp} user={user}/>}
       <Routes>
         <Route exact path="/" element={<Homepage />}/>
         <Route path="/search/:id" element={<RestaurantsContainer setSearch={setSearch}/>}/>
-        <Route path="/restaurant/:id" element={<Restaurant setRestaurantInApp={setRestaurantInApp} user={user.user}/>}/>
+        <Route path="/restaurant/:id" element={<Restaurant setRestaurantInApp={setRestaurantInApp} user={user.user || {}}/>}/>
         <Route path="/dish/:id" element={<Dish />}/>
-        {/* <Route path="/restaurant/newDishForm" element={<NewDishReviewForm/>}/> */}
       </Routes>
     </div>
   );
