@@ -1,6 +1,7 @@
 import { getByPlaceholderText } from '@testing-library/react'
 import Restaurant from '../fixtures/Restaurant.json'
 import Restaurant2 from "../fixtures/Restaurant2.json"
+import Review from "../fixtures/Review.json"
 describe('The Single Restaurant Page', () => {
   beforeEach(() => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant)
@@ -57,32 +58,38 @@ describe('The Single Restaurant Page', () => {
   })
 
   it("should be able to see a dish's details in more depth", () => {
-    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2)
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
+    cy.wait('@getRest2')
     cy.get(".addNewDishButton").click({ force: true })
     .get(".fire").first().click()
     .get(".spiceRating").contains("rating: 1")
     .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
     .get(".submitNewDishButton").click()
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review).as("getReview")
     .get(".dishName").click()
+    cy.wait("@getReview")
     .get(".backButton").should("exist")
     .get(".reviewsHeader").contains("Customer Reviews")
   })
 
   it("should be able to go back to the restaurant view when in the dish details", () => {
-    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2)
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
+    cy.wait('@getRest2')
     cy.get(".addNewDishButton").click({ force: true })
     .get(".fire").first().click()
     .get(".spiceRating").contains("rating: 1")
     .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
     .get(".submitNewDishButton").click()
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review).as("getReview")
     .get(".dishName").click()
-    .get(".backButton").click()
+    cy.wait("@getReview")
+    .get(".backButton").click({ force: true })
     .get(".backButton").should('not.exist')
     .get(".dishCardInfo").should('have.length', 1)
   })
 
   it("should be able to exit the form if the user doesn't want to add a review", () => {
-    cy.get(".addNewDishButton").click()
+    cy.get(".addNewDishButton").click({ force: true })
     .get(".exitModalImage").click()
     .get(".exitModalImage").should('not.exist')
   })
