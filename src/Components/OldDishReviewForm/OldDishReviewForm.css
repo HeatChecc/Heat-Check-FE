@@ -43,3 +43,11 @@ button {
     flex-direction: column;
     align-items: center;
 }
+
+button {
+    background-color: #780B0B;
+    color: white;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+}

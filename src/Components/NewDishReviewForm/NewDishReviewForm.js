@@ -7,6 +7,7 @@ import "./NewDishReview.css"
 
 const NewDishReviewForm = ({id, addDishToArray, setShowForm, toggleModal, user, category, getRestaurant}) => {
   console.log('rest', getRestaurant)
+  console.log('id9', id)
 
   const ADD_DISH = gql`
   mutation AddDish($name: String!, $cuisineType: String!, $yelpId: String!, $spiceRating: Int!){
@@ -43,6 +44,9 @@ function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if (!dishName || !rating) {
+      return
+    }
     addDish({ variables: {
       name: dishName,
       cuisineType: category,
