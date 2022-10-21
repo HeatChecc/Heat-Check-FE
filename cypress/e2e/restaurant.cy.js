@@ -93,4 +93,18 @@ describe('The Single Restaurant Page', () => {
     .get(".exitModalImage").click()
     .get(".exitModalImage").should('not.exist')
   })
+
+  it("should be able to delete a dish", () => {
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
+    cy.wait('@getRest2')
+    cy.get(".addNewDishButton").click({ force: true })
+    .get(".fire").first().click()
+    .get(".spiceRating").contains("rating: 1")
+    .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
+    .get(".submitNewDishButton").click()
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant).as("getRest")
+    cy.get(".deleteDishButton").click()
+    cy.wait('@getRest')
+    .get(".dishCardInfo").should('have.length', 0)
+  })
 })
