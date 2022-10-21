@@ -1,5 +1,7 @@
 import { getByPlaceholderText } from '@testing-library/react'
 import Restaurant from '../fixtures/Restaurant.json'
+import Restaurant2 from "../fixtures/Restaurant2.json"
+import Review from "../fixtures/Review.json"
 describe('The Single Restaurant Page', () => {
   beforeEach(() => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant)
@@ -42,48 +44,67 @@ describe('The Single Restaurant Page', () => {
     .get(".fire").should('have.length', 5)
     .get(".spiceRating").contains("rating: 0")
     .get('input[name="dishName"]')
-    .get('input[name="description"]')
     .get(".submitNewDishButton").contains("Add New Dish Review")
   })
 
   it("should be able to add a new dish review", () => {
-    cy.get(".addNewDishButton").click()
-    .get(".fire").last().click()
-    .get(".spiceRating").contains("rating: 5")
-    .get('input[name="dishName"]').type('Chicken Masala').should('have.value', 'Chicken Masala')
-    .get('input[name="description"]').type('It burned twice').should('have.value', 'It burned twice')
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2)
+    cy.get(".addNewDishButton").click({ force: true })
+    .get(".fire").first().click()
+    .get(".spiceRating").contains("rating: 1")
+    .get('input[name="dishName"]').type('Kirby').should('have.value', 'Kirby')
     .get(".submitNewDishButton").click()
     .get(".dishCardInfo").should('have.length', 1)
   })
 
   it("should be able to see a dish's details in more depth", () => {
-    cy.get(".addNewDishButton").click()
-    .get(".fire").last().click()
-    .get(".spiceRating").contains("rating: 5")
-    .get('input[name="dishName"]').type('Chicken Masala').should('have.value', 'Chicken Masala')
-    .get('input[name="description"]').type('It burned twice').should('have.value', 'It burned twice')
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
+    cy.wait('@getRest2')
+    cy.get(".addNewDishButton").click({ force: true })
+    .get(".fire").first().click()
+    .get(".spiceRating").contains("rating: 1")
+    .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
     .get(".submitNewDishButton").click()
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review).as("getReview")
     .get(".dishName").click()
+    cy.wait("@getReview")
     .get(".backButton").should("exist")
     .get(".reviewsHeader").contains("Customer Reviews")
   })
 
-  it("should be able to go back to the restuant view when in the dish details", () => {
-    cy.get(".addNewDishButton").click()
-    .get(".fire").last().click()
-    .get(".spiceRating").contains("rating: 5")
-    .get('input[name="dishName"]').type('Chicken Masala').should('have.value', 'Chicken Masala')
-    .get('input[name="description"]').type('It burned twice').should('have.value', 'It burned twice')
+  it("should be able to go back to the restaurant view when in the dish details", () => {
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
+    cy.wait('@getRest2')
+    cy.get(".addNewDishButton").click({ force: true })
+    .get(".fire").first().click()
+    .get(".spiceRating").contains("rating: 1")
+    .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
     .get(".submitNewDishButton").click()
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review).as("getReview")
     .get(".dishName").click()
-    .get(".backButton").click()
+    cy.wait("@getReview")
+    .get(".backButton").click({ force: true })
     .get(".backButton").should('not.exist')
     .get(".dishCardInfo").should('have.length', 1)
   })
 
   it("should be able to exit the form if the user doesn't want to add a review", () => {
-    cy.get(".addNewDishButton").click()
+    cy.get(".addNewDishButton").click({ force: true })
     .get(".exitModalImage").click()
     .get(".exitModalImage").should('not.exist')
+  })
+
+  it("should be able to delete a dish", () => {
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
+    cy.wait('@getRest2')
+    cy.get(".addNewDishButton").click({ force: true })
+    .get(".fire").first().click()
+    .get(".spiceRating").contains("rating: 1")
+    .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
+    .get(".submitNewDishButton").click()
+    cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant).as("getRest")
+    cy.get(".deleteDishButton").click()
+    cy.wait('@getRest')
+    .get(".dishCardInfo").should('have.length', 0)
   })
 })

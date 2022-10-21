@@ -2,6 +2,7 @@
     background-color: black;
     color: white;
     height: 100vh;
+    margin-left: 15%;
 }
 
 .cityName {
@@ -19,6 +20,8 @@
     background-color: #780B0B;
     color: white;
     height: 40px;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 .menuList {
@@ -28,7 +31,7 @@
 }
 
 .menuTitle {
-    padding-right: 520px;
+    padding-right: 20rem;
     text-decoration: underline;
 }
 
@@ -40,6 +43,7 @@
     width: 900px;
     border: 1px solid;
     overflow-x: hidden;
+    /* margin-left: 10rem; */
 }
 
 .myoverlay {
