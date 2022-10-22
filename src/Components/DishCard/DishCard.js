@@ -39,7 +39,7 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
 
   function RemoveDish() {
 
-  const [deleteDish, { error, loading, called }] = useMutation(DELETE_DISH, {
+  const [deleteDish, { error, loading}] = useMutation(DELETE_DISH, {
     refetchQueries: [
       {query: getRestaurant,
         variables:{
@@ -47,7 +47,7 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
         }}
     ]
   })
-  
+
   if (loading) return <Loading />;
   if (error) return <p>Error :(</p>;
 

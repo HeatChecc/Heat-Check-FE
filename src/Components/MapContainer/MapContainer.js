@@ -61,7 +61,7 @@ function MapContainer({restaurants}) {
             {popupInfo.name} | {' '}
             <Link className="popName" to={`/restaurant/${popupInfo.id}`}> View Details </Link>
           </div>
-          <img width="100%" src={popupInfo.imageUrl} />
+          <img width="100%" src={popupInfo.imageUrl} alt={popupInfo.name}/>
         </Popup>
       )}
     </Map>
