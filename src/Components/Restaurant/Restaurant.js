@@ -17,9 +17,6 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   const [oldDishObject, setOldDishObject] = useState({})
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log('new dishes', newDishes)
-  console.log('id21', id)
-
   const GET_RESTAURANT = gql`
   query Restaurant($yelp_id: String! ) {
     restaurant(id: $yelp_id) {
