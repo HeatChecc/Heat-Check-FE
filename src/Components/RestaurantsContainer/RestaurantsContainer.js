@@ -45,8 +45,10 @@ const RestaurantsContainer = ({ setSearch }) => {
 
   return (
     <div className='restaurantContainer'>
-      <button className='mapButton' onClick={() => setMapView(true)}>Map View</button>
-      <button className='listButton' onClick={() => setMapView(false)}>List View</button>
+      <div className='restaurantButtonsContainer'>
+        <button className='mapButton' onClick={() => setMapView(true)}>Map View</button>
+        <button className='listButton' onClick={() => setMapView(false)}>List View</button>
+      </div>
       <div className='cardsContainer'><DisplayRestaurants /></div>
       <div className='emptySpace'></div>
     </div>
