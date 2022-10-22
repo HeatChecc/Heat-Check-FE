@@ -8,7 +8,6 @@ import MapContainer from '../MapContainer/MapContainer'
 
 const RestaurantsContainer = ({ setSearch }) => {
   const [mapView, setMapView] = useState(false)
-  const [restaurants, setRestaurants] = useState({}) 
   let { id } = useParams();
   setSearch(id)
 

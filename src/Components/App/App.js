@@ -7,8 +7,6 @@ import Restaurant from '../Restaurant/Restaurant';
 import Dish from '../Dish/Dish';
 import SideContainer from '../SideContainer/SideContainer';
 import Header from '../Header/Header';
-import Map from 'react-map-gl';
-import MapContainer from '../MapContainer/MapContainer';
 // import NewDishReviewForm from '../NewDishReviewForm/NewDishReviewForm';
 
 const App = () => {
@@ -29,7 +27,6 @@ const App = () => {
         <Route path="/search/:id" element={<RestaurantsContainer setSearch={setSearch}/>}/>
         <Route path="/restaurant/:id" element={<Restaurant setRestaurantInApp={setRestaurantInApp} user={user.user || {}}/>}/>
         <Route path="/dish/:id" element={<Dish />}/>
-        <Route path="/map-test" element={<MapContainer />}/>
       </Routes>
     </div>
   );

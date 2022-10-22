@@ -21,11 +21,11 @@ function MapContainer({restaurants}) {
     return res
   }, 0)
   const [geojson, setGeojson] = useState({});
-  const [viewport, setViewport] = useState({
+  const viewport = {
     longitude: aveLon,
     latitude: aveLat,
     zoom: 11
-  });
+  };
 
   useEffect(() => {
     let pinArray = []
