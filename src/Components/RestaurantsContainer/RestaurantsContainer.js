@@ -34,10 +34,10 @@ const RestaurantsContainer = ({ setSearch }) => {
 
     if (!mapView) {
       return data.restaurants.map((restaurant) => (
-        <RestaurantCard restaurant={restaurant} />
+        <RestaurantCard key={restaurant.id} restaurant={restaurant} />
       ));
     } else {
-      return <MapContainer restaurants={data.restaurants} />
+      return <MapContainer key={Math.random()} restaurants={data.restaurants} />
     }
 
   }
@@ -45,8 +45,10 @@ const RestaurantsContainer = ({ setSearch }) => {
 
   return (
     <div className='restaurantContainer'>
-      <button classname='mapButton' onClick={() => setMapView(true)}>Map View</button>
-      <button classname='listButton' onClick={() => setMapView(false)}>List View</button>
+      <div className='restaurantButtonsContainer'>
+        <button className='mapButton' onClick={() => setMapView(true)}>Map View</button>
+        <button className='listButton' onClick={() => setMapView(false)}>List View</button>
+      </div>
       <div className='cardsContainer'><DisplayRestaurants /></div>
       <div className='emptySpace'></div>
     </div>

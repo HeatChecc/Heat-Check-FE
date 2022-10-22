@@ -17,7 +17,7 @@ const Dish = ({dishId, name, toggleDishModal, setDishNameClicked, getDishReviews
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
 
-    console.log(data.dish.reviews)
+    console.log('reviews', data.dish.reviews)
     const reviewCards = data.dish.reviews.map(review => {
       const {description, overallRating, id} = review
       return <div className='reviewContainer' key={id}>

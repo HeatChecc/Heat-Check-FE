@@ -1,15 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import "./MapContainer.css"
-import Map, {Source, Layer} from 'react-map-gl';
-
-const layerStyle = {
-  id: 'point',
-  type: 'circle',
-  paint: {
-    'circle-radius': 10,
-    'circle-color': '#000000'
-  }
-};
+import { Link } from 'react-router-dom'
+import Map, { Marker, Popup} from 'react-map-gl';
+import Pin from '../Pin/Pin';
 
 function MapContainer({restaurants}) {
   let aveLon = restaurants.reduce((res, restaurant) => {
@@ -20,30 +13,32 @@ function MapContainer({restaurants}) {
     res += (restaurant.lat / restaurants.length)
     return res
   }, 0)
-  const [geojson, setGeojson] = useState({});
+  const [pins, setPins] = useState(null)
+  const [popupInfo, setPopupInfo] = useState(null);
   const viewport = {
     longitude: aveLon,
     latitude: aveLat,
     zoom: 11
   };
 
-  useEffect(() => {
-    let pinArray = []
-    restaurants.map(restaurant => {
-      let pinObject = {type: 'Feature', geometry: {type: 'Point', coordinates: [restaurant.lon, restaurant.lat]}}
-      return pinArray.push(pinObject)     
-    });
-
-    let objectCopy = {
-      type: 'FeatureCollection',
-      features:[
-        {type: 'Feature', geometry: {type: 'Point', coordinates: [-122.4, 37.8]}}
-      ] 
-    }
-    objectCopy.features = pinArray
-    setGeojson({...objectCopy})
-  },[restaurants])
-
+ useEffect(() => {
+      const res = restaurants.map((restaurant) => {
+        return <Marker
+          key={restaurant.id}
+          longitude={restaurant.lon}
+          latitude={restaurant.lat}
+          anchor="bottom"
+          onClick={e => {
+            //need event propagation cause i was not allowed to click on a marker to see details without it
+            e.originalEvent.stopPropagation();
+            setPopupInfo(restaurant);
+          }}
+        >
+          <Pin />
+        </Marker>
+    })
+    setPins(res)
+},[restaurants])
 
   return (
     <Map 
@@ -52,9 +47,23 @@ function MapContainer({restaurants}) {
     style={{width: 600, height: 400}}
     mapStyle="mapbox://styles/mapbox/streets-v9"
     >
-      <Source id="my-data" type="geojson" data={geojson}>
-        <Layer {...layerStyle} />
-      </Source>
+
+      {pins}
+
+      {popupInfo && (
+        <Popup
+          anchor="top"
+          longitude={popupInfo.lon}
+          latitude={popupInfo.lat}
+          onClose={() => setPopupInfo(null)}
+        >
+          <div className='popupDetails'>
+            {popupInfo.name} | {' '}
+            <Link className="popName" to={`/restaurant/${popupInfo.id}`}> View Details </Link>
+          </div>
+          <img width="100%" src={popupInfo.imageUrl} alt={popupInfo.name}/>
+        </Popup>
+      )}
     </Map>
   );
 }
