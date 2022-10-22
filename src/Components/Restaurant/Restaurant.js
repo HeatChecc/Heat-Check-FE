@@ -75,7 +75,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
 
   const toggleModal = () => {
     setShowForm(true)
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen)
   }
 
   const dishCards = newDishes.map(dish => {
