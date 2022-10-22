@@ -1,10 +1,14 @@
+import React, {useState} from 'react'
 import {gql, useQuery} from '@apollo/client'
 import "./RestaurantsContainer.css"
 import { useParams } from 'react-router-dom'
 import RestaurantCard from '../RestaurantCard/RestaurantCard'
 import Loading from '../Loading/Loading'
+import MapContainer from '../MapContainer/MapContainer'
 
 const RestaurantsContainer = ({ setSearch }) => {
+  const [mapView, setMapView] = useState(false)
+  const [restaurants, setRestaurants] = useState({}) 
   let { id } = useParams();
   setSearch(id)
 
@@ -28,18 +32,23 @@ const RestaurantsContainer = ({ setSearch }) => {
   
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
-  
-    return data.restaurants.map((restaurant) => (
-      <RestaurantCard restaurant={restaurant} />
-    ));
+
+    if (!mapView) {
+      return data.restaurants.map((restaurant) => (
+        <RestaurantCard restaurant={restaurant} />
+      ));
+    } else {
+      return <MapContainer restaurants={data.restaurants} />
+    }
+
   }
 
 
   return (
     <div className='restaurantContainer'>
-      <div className='cardsContainer'>
-        <DisplayRestaurants />
-      </div>
+      <button classname='mapButton' onClick={() => setMapView(true)}>Map View</button>
+      <button classname='listButton' onClick={() => setMapView(false)}>List View</button>
+      <div className='cardsContainer'><DisplayRestaurants /></div>
       <div className='emptySpace'></div>
     </div>
   )
