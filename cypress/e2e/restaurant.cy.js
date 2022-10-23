@@ -39,7 +39,7 @@ describe('The Single Restaurant Page', () => {
   })
 
   it('should be able to see a form to add a new dish', () => {
-    cy.get(".addNewDishButton").click()
+    cy.get(".addNewDishButton").click({ force: true })
       .get(".exitModalImage").should("exist")
       .get(".fire").should('have.length', 5)
       .get(".spiceRating").contains("rating: 0")
