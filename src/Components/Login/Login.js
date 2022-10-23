@@ -40,12 +40,13 @@ const Login = ({signIn, setSignIn, setUser}) => {
       <div>
         <form className='loginForm' >
         <input
+            className='loginInput'
             placeholder='userId'
             value={userIdInput}
             onChange={(event) => setUserIdInput(event.target.value)}
             name='idInput'
           ></input>
-        <button onClick={(e) => loginSubmit(e)}>
+        <button className="logInButton" onClick={(e) => loginSubmit(e)}>
           Login
         </button>
         </form>

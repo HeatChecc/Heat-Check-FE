@@ -19,5 +19,6 @@ describe('empty spec', () => {
       cy.get('.searchButton').click()
       cy.get('.addressErrorMsg').should('exist')
     })
+
   })
 })

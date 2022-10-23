@@ -16,7 +16,6 @@ const App = () => {
   const [user, setUser] = useState({})
   const [signIn, setSignIn] = useState(false)
   const location = useLocation()
-  const [AboutUs, setAboutUs] = useState(true)
   // const [dish, setDish] = useState("")
 
   return (

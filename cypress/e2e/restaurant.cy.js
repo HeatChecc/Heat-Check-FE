@@ -33,9 +33,9 @@ describe('The Single Restaurant Page', () => {
 
   it('should have a sidebar', () => {
     cy.get(".sideBar")
-    .get(".sideButton").should("have.length", 2)
+    .get(".sideButton").should("have.length", 3)
     .get(".sideButton").first().contains("Homepage")
-    .get(".sideButton").last().contains("Last Restaurant")
+    .get(".sideButton").last().contains("About Heat Check")
   })
 
   it('should be able to see a form to add a new dish', () => {
