@@ -1,5 +1,5 @@
 # Heat-Check-FE
-<img width="150" alt="heat-check-logo" src="https://user-images.githubusercontent.com/96998327/197214003-ad1723a9-bbed-44da-b2d8-6ffcb6a5b638.png">
+<img width="100%" alt="heat-check-logo" src="https://user-images.githubusercontent.com/96998327/197214003-ad1723a9-bbed-44da-b2d8-6ffcb6a5b638.png">
 
 ## Table of Contents
   - [Introduction](#introduction)
@@ -15,18 +15,21 @@
   - [Project Specs](#project-specs)
 
 ## Introduction
-    - Visit Heat-Check to...
+    - Visit Heat-Check to explore spicy restaurants by location and add reviews, ratings, or dishes to our menu!
 
 ## Technologies
     - React
     - GraphQL
     - Cypress
+    - MapBox
     - Javascript
     - HTML
     - CSS
 
 ## Features
-    - You are able to...
+    - Users are able to search for spicy restaurants by city, address, or zip code
+    - Users are able to log in to add reviews, ratings, and dishes to menu
+    - Users are given 20 different spicy restaurants in a list or map view
 
 ## Illustrations
 ![]()
@@ -35,10 +38,18 @@
 Visit our published Heat-Check page [here]( https://heatcheck-fe.herokuapp.com/)
 
 ## Possible Future Extensions
-    - 
+    - Getting directions from a specific location to desired spicy restaurant
+    - Have a user profile that displays users reviews 
+    - Upload images of restaurant and dish
+    - QR code feature for menus
 
 ## Set Up
-1. Fork this repo  
+  - In your terminal, $ git clone https://github.com/HeatChecc/Heat-Check-FE
+  - Make a new directory and $ cd into it
+  - Install NPM packages with $ npm install, Do NOT run npm audit fix --force
+  - Type $ npm start, This runs the app in the development mode
+  - Open http://localhost:3000 in your browser to view Heat Check
+  - Once you are done using Heat Check, make sure to type Control + C in your terminal stop the server
 
 ## Organizational Resources
 - [MiroBoard](https://miro.com/app/board/uXjVPO-BUOo=/)
