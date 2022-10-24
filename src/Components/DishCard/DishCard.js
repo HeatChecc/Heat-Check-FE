@@ -7,7 +7,7 @@ import Dish from '../Dish/Dish';
 import { gql, useMutation } from '@apollo/client'
 import Loading from '../Loading/Loading';
 
-const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDishObject, setShowForm, toggleModal, getDishReviews, getRestaurant, restaurantId }) => {
+const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDishObject, setShowForm, toggleModal, getDishReviews, getRestaurant, restaurantId, user }) => {
   const [dishNameClicked, setDishNameClicked] = useState(false)
   const [isOpen, setIsOpen] = useState(false);
 
@@ -75,8 +75,8 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
       <div className='dishTopInfo'>
         <h2 className='dishName' onClick={() => toggleDishModal()}>{name}</h2>
         <p>{rating}X🌶</p>
-        <button className="reviewExistingDishButton" onClick={() => oldFormSetUp()}>Review Dish</button>
-        <button className='deleteDishButton' onClick={() => handleClick()} > Delete Dish </button>
+        {user.id && <button className="reviewExistingDishButton" onClick={() => oldFormSetUp()}>Review Dish</button>}
+        {user.id && <button className='deleteDishButton' onClick={() => handleClick()} > Delete Dish </button>}
       </div>
       <p className='dishDescription'>{description}</p>
     </div>

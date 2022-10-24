@@ -41,6 +41,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
         reviews {
           id
           description
+          userId
           }
         }
       }
@@ -81,6 +82,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
       key={dish.id}
       dishId={dish.id}
       name={name}
+      user={user}
       rating={rating}
       description={description}
       setShowOldForm={setShowOldForm}
@@ -93,7 +95,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
     />
   })
 
-  function DisplayRestaurant() {
+  function DisplayRestaurant({ user }) {
     const { loading, error, data } = useQuery(GET_RESTAURANT, {variables: {yelp_id: id}});
   
     if (loading) return <Loading />;
@@ -106,7 +108,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
         <div className='menuList'>
           <div className='menuHeader'>
             <h2 className='menuTitle'>Hot Menu</h2>
-            <button className='addNewDishButton' onClick={() => toggleModal()}>Add New Dish Review</button>
+            {user.id && <button className='addNewDishButton' onClick={() => toggleModal()}>Add New Dish Review</button>}
             <Modal
               isOpen={isOpen}
               onRequestClose={toggleModal}
@@ -143,7 +145,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
 
   return (
     <div className='restaurantPage'>
-      <DisplayRestaurant />
+      <DisplayRestaurant user={user} />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { getByPlaceholderText } from '@testing-library/react'
 import Restaurant from '../fixtures/Restaurant.json'
 import Restaurant2 from "../fixtures/Restaurant2.json"
 import Review from "../fixtures/Review.json"
+import User from "../fixtures/User.json"
 describe('The Single Restaurant Page', () => {
   beforeEach(() => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant)
@@ -22,6 +23,10 @@ describe('The Single Restaurant Page', () => {
   })
 
   it('should have a button to add a review for a dish', () => {
+    cy.get('.signInButton').click().wait(1000)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
+    cy.get('input[class*="loginInput"]').type('1')
+    cy.get('.logInButton').click({ force: true })
     cy.get(".addNewDishButton").contains("Add New Dish Review")
   })
 
@@ -39,6 +44,10 @@ describe('The Single Restaurant Page', () => {
   })
 
   it('should be able to see a form to add a new dish', () => {
+    cy.get('.signInButton').click().wait(1000)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
+    cy.get('input[class*="loginInput"]').type('1')
+    cy.get('.logInButton').click({ force: true })
     cy.get(".addNewDishButton").click({ force: true })
       .get(".exitModalImage").should("exist")
       .get(".fire").should('have.length', 5)
@@ -49,6 +58,10 @@ describe('The Single Restaurant Page', () => {
 
   it("should be able to add a new dish review", () => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2)
+    cy.get('.signInButton').click().wait(1000)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
+    cy.get('input[class*="loginInput"]').type('1')
+    cy.get('.logInButton').click({ force: true })
     cy.get(".addNewDishButton").click({ force: true })
       .get(".fire").first().click()
       .get(".spiceRating").contains("rating: 1")
@@ -60,6 +73,10 @@ describe('The Single Restaurant Page', () => {
   it("should be able to see a dish's details in more depth", () => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
     cy.wait('@getRest2')
+    cy.get('.signInButton').click().wait(1000)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
+    cy.get('input[class*="loginInput"]').type('1')
+    cy.get('.logInButton').click({ force: true })
     cy.get(".addNewDishButton").click({ force: true })
       .get(".fire").first().click()
       .get(".spiceRating").contains("rating: 1")
@@ -75,6 +92,10 @@ describe('The Single Restaurant Page', () => {
   it("should be able to go back to the restaurant view when in the dish details", () => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
     cy.wait('@getRest2')
+    cy.get('.signInButton').click().wait(1000)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
+    cy.get('input[class*="loginInput"]').type('1')
+    cy.get('.logInButton').click({ force: true })
     cy.get(".addNewDishButton").click({ force: true })
       .get(".fire").first().click()
       .get(".spiceRating").contains("rating: 1")
@@ -89,6 +110,10 @@ describe('The Single Restaurant Page', () => {
   })
 
   it("should be able to exit the form if the user doesn't want to add a review", () => {
+    cy.get('.signInButton').click().wait(1000)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
+    cy.get('input[class*="loginInput"]').type('1')
+    cy.get('.logInButton').click({ force: true })
     cy.get(".addNewDishButton").click({ force: true })
       .get(".exitModalImage").click()
       .get(".exitModalImage").should('not.exist')
@@ -97,6 +122,10 @@ describe('The Single Restaurant Page', () => {
   it("should be able to delete a dish", () => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
     cy.wait('@getRest2')
+    cy.get('.signInButton').click().wait(1000)
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
+    cy.get('input[class*="loginInput"]').type('1')
+    cy.get('.logInButton').click({ force: true })
     cy.get(".addNewDishButton").click({ force: true })
       .get(".fire").first().click()
       .get(".spiceRating").contains("rating: 1")
