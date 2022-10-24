@@ -4,7 +4,7 @@ import "./DishCard.css"
 import Modal from "react-modal";
 import Dish from '../Dish/Dish';
 // Modal.setAppElement("#root")
-import { gql, useMutation } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import Loading from '../Loading/Loading';
 
 const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDishObject, setShowForm, toggleModal, getDishReviews, getRestaurant, restaurantId, user }) => {
@@ -36,6 +36,19 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
         }
       }
       `
+
+  function RandomDishReview() {
+    const { loading, error, data } = useQuery(getDishReviews, {variables: {id: dishId}});
+    if (loading) return <Loading />;
+    if (error) return <p>Error :(</p>;
+
+    if(data.dish.reviews.length > 0) {
+      let reviewIndex = Math.floor(Math.random() * data.dish.reviews.length);
+      return <p className='randomReviewClass'> A user said: "{data.dish.reviews[reviewIndex].description}"</p>
+    } else {
+      return <p className='randomReviewClass'>There are no reviews for this HAWT dish yet🥵</p>
+    }
+  }
 
   function RemoveDish() {
 
@@ -78,13 +91,13 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
         {user.id && <button className="reviewExistingDishButton" onClick={() => oldFormSetUp()}>Review Dish</button>}
         {user.id && <button className='deleteDishButton' onClick={() => handleClick()} > Delete Dish </button>}
       </div>
-      <p className='dishDescription'>{description}</p>
+        <RandomDishReview />
     </div>
   )
   }
 
   return (
-    <div>
+    <div className='dishCard'>
       <RemoveDish />
     </div>
   )

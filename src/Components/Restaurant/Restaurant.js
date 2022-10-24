@@ -77,13 +77,13 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   }
 
   const dishCards = newDishes.map(dish => {
-    const { name, rating, description } = dish
+    const { name, spiceRating, description } = dish
     return <DishCard
       key={dish.id}
       dishId={dish.id}
       name={name}
       user={user}
-      rating={rating}
+      rating={spiceRating}
       description={description}
       setShowOldForm={setShowOldForm}
       setShowForm={setShowForm}

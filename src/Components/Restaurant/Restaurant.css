@@ -20,14 +20,16 @@
     background-color: #780B0B;
     color: white;
     height: 40px;
-    margin: 10px;
+    margin: 8px;
+    margin-left: 326px;
     border-radius: 10px;
 }
 
 .menuList {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    padding-left: 320px;
 }
 
 .menuTitle {
