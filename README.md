@@ -49,9 +49,16 @@ Visit our published Heat-Check page [here]( https://heatcheck-fe.herokuapp.com/)
   - [W3Schools](https://www.w3schools.com/)
 
 ## Contributors
-  - [Ivy Nguyen](https://github.com/INguyen22)
-  - [David Daw](https://github.com/davidhdaw)
-  - [Cleveland Ticoalu](https://github.com/cleveland231)
+  ### Front End:
+  - [Ivy Nguyen](https://github.com/INguyen22) - [LinkedIn](https://www.linkedin.com/in/ivy-nguyen-051b27212/)
+  - [David Daw](https://github.com/davidhdaw) - [LinkedIn](https://www.linkedin.com/in/david-daw-04aa36237/)
+  - [Cleveland Ticoalu](https://github.com/cleveland231) - [LinkedIn](https://www.linkedin.com/in/cleveland-ticoalu/)
+
+  ### Back End:
+  - [Phillip Stewart](https://github.com/philmarcu) - [LinkedIn](https://www.linkedin.com/in/phillip-stewart-15497183/)
+  - [Eli Sachs](https://github.com/easachs) - [LinkedIn](https://www.linkedin.com/in/easachs/)
+  - [Gauri Joshi](https://github.com/gaurijo) - [LinkedIn](https://www.linkedin.com/in/gaurijo/)
+  - [Ethan Nguyen](https://github.com/Ethan-t-n) - [LinkedIn](https://www.linkedin.com/in/ethan-nguyen-82b398233/)
 
 ## Project Specs
   - The project spec & rubric can be found [here](https://mod4.turing.edu/projects/capstone/)
