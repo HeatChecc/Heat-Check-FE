@@ -21,8 +21,12 @@ button {
 }
 
 .exitModalImage {
-    height: 70px;
-    width: 110px;
+    position: fixed;
+    top: 0;
+    right: 1px;
+    height: 38px;
+    width: 228px;
+    cursor: pointer;
 }
 
 .fire {
@@ -44,10 +48,20 @@ button {
     align-items: center;
 }
 
-button {
+.dishReviewInput {
+    height: 150px;
+}
+
+.submitNewReviewButton {
     background-color: #780B0B;
     color: white;
     height: 40px;
     margin: 10px;
     border-radius: 10px;
 }
+
+.submitNewReviewButton:hover {
+    background-color: darkgoldenrod;
+    transform: scale(1.1); 
+    transition: 0.2s ease-in;
+  }

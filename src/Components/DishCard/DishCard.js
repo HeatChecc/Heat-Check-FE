@@ -38,6 +38,7 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
       `
 
   function RandomDishReview() {
+    console.log('dish id', dishId)
     const { loading, error, data } = useQuery(getDishReviews, {variables: {id: dishId}});
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
@@ -65,6 +66,7 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
   if (error) return <p>Error :(</p>;
 
   const handleClick = () => {
+    console.log('clicked id to delete', dishId)
     deleteDish({
       variables: {
         id: dishId

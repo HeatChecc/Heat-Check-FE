@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { gql, useMutation} from '@apollo/client'
 import "./OldDishReviewForm.css"
 import fireIcon from '../Images/fire-svgrepo-com.svg'
-import bathroomLogo from "../Images/gotta-go.png"
+import bathroomLogo from "../Images/gotta-go2.png"
 import Loading from '../Loading/Loading'
 
 const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal, user, getDishReviews }) => {
@@ -60,22 +60,26 @@ const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal, user, g
         <img onClick={() => toggleModal()} className="exitModalImage" src={bathroomLogo} alt="close modal" />
         <form className="oldDishForm" onSubmit={handleSubmit}>
           <div className='ratingContainer'>
-            <img className="fire" src={fireIcon} alt='fire1' onClick={() => { setRating(1) }}></img>
-            <img className="fire" src={fireIcon} alt='fire2' onClick={() => { setRating(2) }}></img>
-            <img className="fire" src={fireIcon} alt='fire3' onClick={() => { setRating(3) }}></img>
-            <img className="fire" src={fireIcon} alt='fire4' onClick={() => { setRating(4) }}></img>
-            <img className="fire" src={fireIcon} alt='fire5' onClick={() => { setRating(5) }}></img>
-            <p className='spiceRating'>rating: {rating} </p>
+          <i className="em em-confused" onClick={() => {setRating(1)}} aria-label="CONFUSED FACE"></i>
+          <i className="em em-thinking_face" onClick={() => {setRating(2)}} aria-label="THINKING FACE"></i>
+          <i className="em em-flushed" onClick={() => {setRating(3)}} aria-label="FLUSHED FACE"></i>
+          <i className="em em-hot_face" onClick={() => {setRating(4)}} aria-label="OVERHEATED FACE"></i>
+          <div className='womboCombo' onClick={() => {setRating(5)}}>
+            <i className="em em-fire" aria-label="FIRE"></i>
+            <i className="em em-toilet" aria-label="TOILET"></i>
           </div>
+          </div>
+            <p className='spiceRating'>rating: {rating} </p>
   
           <div className='inputSection'>
           <input
+            className='dishReviewInput'
             placeholder='Review...'
             value={description}
             onChange={(event) => setDescription(event.target.value)}
             name='description'
           ></input>
-          <button type='submit'>Add New Review</button>
+          <button className="submitNewReviewButton" type='submit'>Add Review</button>
           </div>
         </form>
       </div>
@@ -83,7 +87,7 @@ const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal, user, g
   }
 
   return (
-    <div>
+    <div className='addReviewForm'>
       <ExistingDishForm />
     </div>
   )

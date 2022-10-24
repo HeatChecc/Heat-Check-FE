@@ -17,6 +17,14 @@
     background-color: rgba(0, 0, 0, 0.75);
   }
   
+  .logInButton, .signInButton, .signOutButton {
+    background-color: #780B0B;
+    color: white;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+
   .ReactModal__Overlay {
     opacity: 0;
     transition: opacity 500ms ease-in-out;
