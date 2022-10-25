@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header signIn={signIn} setSignIn={setSignIn} setUser={setUser} />
+      <Header signIn={signIn} setSignIn={setSignIn} setUser={setUser} user={user} />
       {location.pathname !== "/" && <SideContainer search={search} restaurantInApp={restaurantInApp} user={user} />}
       <Routes>
         <Route exact path="/" element={<Homepage />} />

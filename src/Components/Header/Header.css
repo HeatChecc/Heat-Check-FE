@@ -20,4 +20,11 @@
     position: fixed;
     top: 5px;
     right: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.userName {
+    color: white;
+    padding-right: 30px;
 }
