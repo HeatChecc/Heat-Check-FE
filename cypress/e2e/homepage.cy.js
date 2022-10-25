@@ -25,7 +25,7 @@ describe('empty spec', () => {
     it('should allow a user to log in', () => {
       cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
       cy.get('.signInButton').click().wait(1000)
-      cy.get('input[class*="loginInput"]').type('1')
+      cy.get('input[name="idInput"]').type('1')
       cy.get('.logInButton').click({ force: true }).wait(1000)
       cy.get('.signInButton').should('not.exist')
       // cy.get(".welcome").contains("Welcome, Eli")
@@ -34,7 +34,7 @@ describe('empty spec', () => {
     it('should allow a user to log out', () => {
       cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
       cy.get('.signInButton').click().wait(1000)
-      cy.get('input[class*="loginInput"]').type('1')
+      cy.get('input[name="idInput"]').type('1')
       cy.get('.logInButton').click({ force: true }).wait(1000)
       // cy.get(".welcome").contains("Welcome, Eli")
       cy.get('.signOutButton').click().wait(1000)
