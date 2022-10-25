@@ -1,11 +1,15 @@
+/* .loginForm {
+} */
+
 .loginModal {
-    background-color: white;
-    position: absolute;
-    top: 50vh;
-    left: 45vw;
-    border: 0px white;
-    border-radius: 8px;
-    padding: 10px;
+  background-color: white;
+  z-index: 5;
+  position: absolute;
+  top: 30vh;
+  left: 42vw;
+  border: 0px white;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .myoverlay {
