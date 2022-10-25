@@ -7,9 +7,16 @@
 .teams {
     display: flex;
     justify-content: space-evenly;
+    margin: 10%;
 }
 
 .teams-style {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
+
+a {
+    color: white;
+}
+
