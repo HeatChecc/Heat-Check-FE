@@ -1,9 +1,14 @@
 import React from 'react'
 import "./Review.css"
 
-const Review = () => {
+const Review = ({description, overallRating}) => {
+
   return (
-    <div>Review</div>
+  <div className='review'>
+    <div className='reviewDetails'>
+    <p className='reviewDescription'>{description}    {overallRating}X🌶</p>
+    </div>
+  </div>
   )
 }
 

@@ -7,6 +7,16 @@
     position: sticky; top: 0;
 }
 
+.listButton, .mapButton {
+    background-color: #780B0B;
+    color: white;
+    height: 40px;
+    width: 110px;
+    font-size: 16px;
+    /* margin: 10px; */
+    border-radius: 10px;
+}
+
 .cardsContainer {
     display: flex;
     align-items: center;

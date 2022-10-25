@@ -45,7 +45,7 @@ function MapContainer({restaurants}) {
     className="mapBox"
     initialViewState={viewport} 
     mapboxAccessToken={'pk.eyJ1IjoiZGF2aWRkYXciLCJhIjoiY2w5ajdtd3RhMHlrcTNubXc3N3J6dWNwdiJ9.Cslh_p8Ow8KRA6Zy3XDhbg'}
-    style={{width: 600, height: 400}}
+    style={{width: 800, height: 600}}
     mapStyle="mapbox://styles/mapbox/streets-v9"
     >
 

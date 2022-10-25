@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import heatLogo from "../Images/heat-check-2.png"
+import heatLogo from "../Images/heat-check-3.png"
 import { useNavigate } from "react-router-dom";
 import "./Homepage.css"
+import Flames from '../Flames/Flames';
 
 const Homepage = () => {
   const [address, setAddress] = useState("")
@@ -32,6 +33,7 @@ const submitAddress = (event) => {
         <button className='searchButton' onClick={(e) => submitAddress(e)}>Search</button>
       </form>
       {addressError && <h2 className='addressErrorMsg'>Please enter a valid city, address or zip code!</h2>}
+      <Flames />
     </div>
   )
 }

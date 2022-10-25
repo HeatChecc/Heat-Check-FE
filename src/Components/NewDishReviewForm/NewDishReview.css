@@ -1,9 +1,15 @@
+.addDishForm {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
 .newFormPage {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
 }
 
 .exitContainer {
@@ -11,13 +17,43 @@
 }
 
 .exitModalImage {
-    height: 70px;
-    width: 110px;
+    position: fixed;
+    top: 0;
+    right: 1px;
+    height: 38px;
+    width: 228px;
+    cursor: pointer;
 }
 
-.fire {
-    height: 100px;
-    width: 100px;
+.ratingContainer {
+    display: flex;
+    align-items: center;
+}
+
+.em-confused, .em-thinking_face, .em-flushed, .em-hot_face {
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    transition: transform .2s;
+    cursor: pointer;
+}
+
+.womboCombo {
+    transition: transform .2s; 
+}
+
+.em-confused:hover, .em-thinking_face:hover, .em-flushed:hover, .em-hot_face:hover {
+    transform: scale(1.2); 
+  }
+
+.womboCombo:hover {
+    transform: scale(1.2); 
+  }
+
+.em-toilet, .em-fire {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
 }
 
 .spiceRating {
@@ -33,3 +69,17 @@
     flex-direction: column;
     align-items: center;
 }
+
+.dishNameInput {
+    height: 39px;
+    width: 200px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+}
+
+.submitNewDishButton:hover {
+    background-color: darkgoldenrod;
+    transform: scale(1.1); 
+    transition: 0.2s ease-in;
+  }
