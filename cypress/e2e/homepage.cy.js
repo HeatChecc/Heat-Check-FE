@@ -28,7 +28,7 @@ describe('empty spec', () => {
       cy.get('input[name="idInput"]').type('1')
       cy.get('.logInButton').click({ force: true }).wait(1000)
       cy.get('.signInButton').should('not.exist')
-      // cy.get(".welcome").contains("Welcome, Eli")
+      cy.get(".userName").contains("Welcome, eli")
     })
 
     it('should allow a user to log out', () => {
@@ -36,7 +36,7 @@ describe('empty spec', () => {
       cy.get('.signInButton').click().wait(1000)
       cy.get('input[name="idInput"]').type('1')
       cy.get('.logInButton').click({ force: true }).wait(1000)
-      // cy.get(".welcome").contains("Welcome, Eli")
+      cy.get(".userName").contains("Welcome, eli")
       cy.get('.signOutButton').click().wait(1000)
       cy.get('.singOutButton').should("not.exist")
     })
