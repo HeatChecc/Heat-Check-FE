@@ -1,10 +1,14 @@
 .restaurantContainer {
     background-color: black;
     color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .restaurantButtonsContainer {
     position: sticky; top: 0;
+    width: 50%;
 }
 
 .listButton, .mapButton {
@@ -15,6 +19,12 @@
     font-size: 16px;
     /* margin: 10px; */
     border-radius: 10px;
+    margin: 0 60px;
+    /* cursor: pointer; */
+}
+
+.listButton:hover, .mapButton:hover {
+    cursor: pointer;
 }
 
 .cardsContainer {
