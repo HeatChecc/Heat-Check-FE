@@ -40,6 +40,11 @@ describe('empty spec', () => {
       cy.get('.signOutButton').click().wait(1000)
       cy.get('.singOutButton').should("not.exist")
     })
+  
+    it('should display a error message if user does not input an address, city, or zip code', () => {
+      cy.get(".searchButton").click()
+      cy.get(".addressErrorMsg").contains("Please enter a valid city, address or zip code!")
+    })
 
   })
 })

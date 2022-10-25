@@ -23,6 +23,13 @@ describe('The Search Page', () => {
     cy.get('.restaurant').should("have.length", 20)
   })
 
+  it('should show an error if there is a network error', () => {
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, {
+      statusCode: 404
+    })
+    .get("p").contains("Error :(")
+  })
+
   it('Should have Himalayan Spice as the first resturant', () => {
     cy.get('.restaurant').first().contains("Himalayan Spice")
       .get(".restRating").contains("Rating: 4.5")
