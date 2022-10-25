@@ -13,4 +13,15 @@
 .backButton {
     background-color: #780B0B;
     color: white;
+    position: fixed;
+    top: 0;
+    right: 1px;
+    height: 38px;
+    width: 108px;
+    cursor: pointer;
+}
+
+.reviewsContainer {
+    display: flex;
+    flex-wrap: wrap;
 }

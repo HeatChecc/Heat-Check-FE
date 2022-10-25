@@ -1,0 +1,17 @@
+.review {
+    display: flex;
+    padding: 10px;
+}
+
+.reviewDetails {
+    display: flex;
+    height: 45px;
+    width: 266px;
+    font-size: 16px;
+    background-size: 200% auto;
+    background-image: url(https://farm5.staticflickr.com/4465/37910962346_7eb9ed0163_o.gif);
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+  }
+

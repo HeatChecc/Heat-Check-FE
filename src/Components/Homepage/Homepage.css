@@ -16,6 +16,7 @@
 .addressForm {
     display: flex;
     padding-bottom: 135px;
+    align-items: center;
     z-index: 5;
 }
 
@@ -26,4 +27,12 @@ input {
     border: 1px solid #FFFFFF;
     background-color: black;
     color: white;
+}
+
+.searchButton {
+    background-color: #780B0B;
+    color: white;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
 }
