@@ -31,6 +31,13 @@ describe('empty spec', () => {
       cy.get(".userName").contains("Welcome, eli")
     })
 
+    it.only('should return an error message if log in id is incorrect', () => {
+      cy.get('.signInButton').click().wait(1000)
+      cy.get('input[name="idInput"]').type('example')
+      cy.get('.logInButton').click({ force: true }).wait(1000)
+      cy.get('.errorText').contains('*error please refresh*')
+    })
+
     it('should allow a user to log out', () => {
       cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
       cy.get('.signInButton').click().wait(1000)
