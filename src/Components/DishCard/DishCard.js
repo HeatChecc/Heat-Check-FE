@@ -1,29 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./DishCard.css"
-// import { Link } from "react-router-dom";
-import Modal from "react-modal";
-import Dish from '../Dish/Dish';
-// Modal.setAppElement("#root")
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { Link } from "react-router-dom";
+import { gql, useMutation} from '@apollo/client'
 import Loading from '../Loading/Loading';
 
-const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDishObject, setShowForm, toggleModal, getDishReviews, getRestaurant, restaurantId, user }) => {
-  const [dishNameClicked, setDishNameClicked] = useState(false)
-  const [isOpen, setIsOpen] = useState(false);
 
-  const oldFormSetUp = () => {
-    setShowOldForm(true)
-    setOldDishObject({
-      dishId: dishId,
-      name: name,
-    })
-    toggleModal()
-    setShowForm(false)
-  }
+const DishCard = ({ dishId, name, rating, getRestaurant, reviews, user, restaurantId }) => {
 
-  const toggleDishModal = () => {
-    setDishNameClicked(true)
-    setIsOpen(!isOpen);
+  const printPeppers = () => {
+    if (rating === 1) {
+      return <>🌶</>
+    } else if (rating === 2) {
+      return <>🌶🌶</>
+    } else if (rating === 3) {
+      return <>🌶🌶🌶</>
+    } else if (rating === 4) {
+      return <>🌶🌶🌶🌶</>
+    }
+    else if (rating === 5) {
+      return <>🌶🌶🌶🌶🌶</>
+    }
   }
 
   const DELETE_DISH = gql`
@@ -38,14 +34,9 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
       `
 
   function RandomDishReview() {
-    console.log('dish id', dishId)
-    const { loading, error, data } = useQuery(getDishReviews, {variables: {id: dishId}});
-    if (loading) return <Loading />;
-    if (error) return <p>Error :(</p>;
-
-    if(data.dish.reviews.length > 0) {
-      let reviewIndex = Math.floor(Math.random() * data.dish.reviews.length);
-      return <p className='randomReviewClass'> A user said: "{data.dish.reviews[reviewIndex].description}"</p>
+    if(reviews.length > 0) {
+      let reviewIndex = Math.floor(Math.random() * reviews.length);
+      return <p className='randomReviewClass'> A user said: "{reviews[reviewIndex].description}"</p>
     } else {
       return <p className='randomReviewClass'>There are no reviews for this HAWT dish yet🥵</p>
     }
@@ -77,20 +68,9 @@ const DishCard = ({ dishId, name, rating, description, setShowOldForm, setOldDis
 
   return (
     <div className='dishCardInfo'>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleDishModal}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
-        {dishNameClicked && <Dish dishId={dishId} name={name} toggleDishModal={toggleDishModal} setDishNameClicked={setDishNameClicked} getDishReviews={getDishReviews} />}
-      </Modal>
       <div className='dishTopInfo'>
-        <h2 className='dishName' onClick={() => toggleDishModal()}>{name}</h2>
-        <p>{rating}X🌶</p>
-        {user.id && <button className="reviewExistingDishButton" onClick={() => oldFormSetUp()}>Review Dish</button>}
+      <Link className="dishName" to={`/dish/${dishId}`}> {name} </Link>
+        <p className='pepperRating'>Rating: {printPeppers()}</p>
         {user.id && <button className='deleteDishButton' onClick={() => handleClick()} > Delete Dish </button>}
       </div>
         <RandomDishReview />

@@ -25,3 +25,11 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.reviewFormButton {
+    background-color: #780B0B;
+    color: white;
+    height: 30px;
+    width: 95px;
+    margin-left: 30px;
+}
