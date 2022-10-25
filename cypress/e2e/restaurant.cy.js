@@ -145,7 +145,7 @@ describe('The Single Restaurant Page', () => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant).as("getRest")
     cy.get(".deleteDishButton").click()
     cy.wait('@getRest')
-    .get(".dishCardInfo").should('have.length', 1)
+    .get(".dishCardInfo").should('have.length', 0)
   })
 
 })
