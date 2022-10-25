@@ -41,3 +41,8 @@
   .ReactModal__Overlay--before-close {
     opacity: 0;
   }
+
+  .errorText {
+    color: white;
+    font-size: 50px;
+  }
