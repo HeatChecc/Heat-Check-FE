@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { gql, useMutation} from '@apollo/client'
 import "./OldDishReviewForm.css"
-import fireIcon from '../Images/fire-svgrepo-com.svg'
 import bathroomLogo from "../Images/gotta-go2.png"
 import Loading from '../Loading/Loading'
 
