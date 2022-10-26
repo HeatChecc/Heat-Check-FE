@@ -1,29 +1,21 @@
 .dishDetails {
     display: flex;
-    justify-content: center;
+    padding-top: 117px;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     height: 100vh;
-}
-
-.dishDetails {
     color: white;
 }
 
-.backButton {
-    background-color: #780B0B;
-    color: white;
-    position: fixed;
-    top: 0;
-    right: 1px;
-    height: 38px;
-    width: 108px;
-    cursor: pointer;
+.dish {
+    text-decoration: underline;
+    padding-right: 30rem;
 }
 
 .reviewsContainer {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 
 .reviewFormButton {

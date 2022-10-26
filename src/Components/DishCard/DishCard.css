@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 355px;
+    width: 475px;
 }
 
 .pepperRating {
@@ -18,7 +18,8 @@
 }
 
 .dishName {
-    text-decoration: underline;
+  font-size: 20px;
+  text-decoration: underline;
 }
 
 .dishDescription {

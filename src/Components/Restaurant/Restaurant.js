@@ -38,16 +38,13 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
         reviews {
           id
           description
+          overallRating
           userId
           }
         }
       }
     }
   `;
-
-  const addDishToArray = (newDish) => {
-    setNewDishes([...newDishes, newDish])
-  }
 
   const toggleModal = () => {
     setShowForm(true)
@@ -72,6 +69,7 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
+    // console.log(data.restaurant.dishes)
     setNewDishes(data.restaurant.dishes)
     return(
       <>
@@ -92,7 +90,6 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
               {showForm && <NewDishReviewForm
                 restaurantId={id}
                 user={user}
-                addDishToArray={addDishToArray}
                 setShowForm={setShowForm}
                 category={data.restaurant.categories}
                 getRestaurant={GET_RESTAURANT}
