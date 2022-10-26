@@ -52,7 +52,6 @@ describe('The Search Page', () => {
     cy.get(".mapboxgl-canvas").should('exist')
     cy.get(".popupMarker").first().click()
     cy.get('.popupDetails').contains("Himalayan Spice")
-    // cy.get(".popName").click()
   })
 
 })

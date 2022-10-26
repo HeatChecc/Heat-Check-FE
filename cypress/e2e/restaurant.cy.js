@@ -3,6 +3,7 @@ import Restaurant from '../fixtures/Restaurant.json'
 import Restaurant2 from "../fixtures/Restaurant2.json"
 import Review from "../fixtures/Review.json"
 import User from "../fixtures/User.json"
+
 describe('The Single Restaurant Page', () => {
   beforeEach(() => {
     cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant)
@@ -70,47 +71,6 @@ describe('The Single Restaurant Page', () => {
     .get(".submitNewDishButton").click({ force: true })
     .get(".dishCardInfo").should('have.length', 1)
   })
-
-  // it("should be able to see a dish's details in more depth", () => {
-  //   cy.get('.signInButton').click({ force: true }).wait(1000)
-  //   cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User).as('getUser')      
-  //   cy.get('input[class*="loginInput"]').type('1')
-  //   cy.get('.logInButton').click({ force: true })
-  //   .wait('@getUser')
-  //   cy.get(".addNewDishButton").click({ force: true })
-  //   .get(".em").first().click()
-  //   .get(".spiceRating").contains("rating: 1")
-  //   .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
-  //   cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
-  //   .get(".submitNewDishButton").click({ force: true })
-  //   // cy.wait('@getRest2')
-  //   cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review).as("getReview")
-  //   .get(".dishName").click({ force: true })
-  //   cy.wait("@getReview")
-  //   .get(".backButton").should("exist")
-  //   .get(".reviewsHeader").contains("Customer Reviews")
-  // })
-
-  // it("should be able to go back to the restaurant view when in the dish details", () => {
-  //   cy.get('.signInButton').click().wait(1000)
-  //   cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User).as('getUser')     
-  //   cy.get('input[class*="loginInput"]').type('1')
-  //   cy.get('.logInButton').click({ force: true })
-  //   .wait('@getUser')
-  //   cy.get(".addNewDishButton").click({ force: true })
-  //   .get(".em").first().click()
-  //   .get(".spiceRating").contains("rating: 1")
-  //   .get('input[name="dishName"]').type('kirby').should('have.value', 'kirby')
-  //   cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Restaurant2).as("getRest2")
-  //   .get(".submitNewDishButton").click()
-  //   // cy.wait('@getRest2')
-  //   cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review).as("getReview")
-  //   .get(".dishName").click()
-  //   cy.wait("@getReview")
-  //   .get(".backButton").click({ force: true })
-  //   .get(".backButton").should('not.exist')
-  //   .get(".dishCardInfo").should('have.length', 1)
-  // })
 
   it("should be able to exit the form if the user doesn't want to add a review", () => {
     cy.get('.signInButton').click().wait(1000)

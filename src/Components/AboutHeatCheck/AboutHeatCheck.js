@@ -5,7 +5,7 @@ const AboutHeatCheck = () => {
     return (
         <div className='aboutHeatCheck'>
 
-            <h1> About Heat Check </h1>
+            <h1 className='aboutHeatCheckTitle'> About Heat Check </h1>
             <p> Looking for two burns? We got you! Log in as a user and simply input a location to find a list of restaurants in the area. </p>
             <p> After melting your tongue, leave a review to an existing dish or add your dish and review to the menu. Thank you and see you again soon! </p>
 

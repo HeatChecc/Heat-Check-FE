@@ -50,7 +50,7 @@ const Dish = ({user, lastRestaurant}) => {
         <h2 className='dish'>{data.dish.name}{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</h2>
         <h2 className='reviewsHeader'>Customer Reviews</h2>
         <div className='reviewsContainer'>
-          {data.dish.reviews.length !== 0 ? reviewCards : <p>No reviews yet.</p>}
+          {data.dish.reviews.length !== 0 ? reviewCards : <p className="noReviewText">No reviews yet.</p>}
         </div>
         <Modal
               isOpen={isOpen}

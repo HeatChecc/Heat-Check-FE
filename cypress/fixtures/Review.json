@@ -10,7 +10,7 @@
         {
           "id": "4",
           "description": "merp",
-          "overallRating": 4,
+          "overallRating": 1,
           "userId": 4,
           "dishId": 1,
           "__typename": "Review"
@@ -18,7 +18,7 @@
         {
           "id": "8",
           "description": "it was meh",
-          "overallRating": 4,
+          "overallRating": 1,
           "userId": 1,
           "dishId": 1,
           "__typename": "Review"

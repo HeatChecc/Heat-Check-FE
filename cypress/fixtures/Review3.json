@@ -1,0 +1,13 @@
+{
+    "data": {
+      "dish": {
+        "id": "1",
+        "name": "pad thai",
+        "cuisineType": "thai",
+        "yelpId": "OT6MJNr8Gzd9nyf25dEl6g",
+        "spiceRating": 3,
+        "reviews": [],
+        "__typename": "Dish"
+      }
+    }
+  }
