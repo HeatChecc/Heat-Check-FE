@@ -7,7 +7,7 @@ import OldDishReviewForm from '../OldDishReviewForm/OldDishReviewForm'
 import Review from '../Review/Review'
 import Modal from "react-modal";
 
-const Dish = ({user, lastRestaurant}) => {
+const Dish = ({user}) => {
   let { id } = useParams();
   let [isOpen, setIsOpen] = useState(false)
 
