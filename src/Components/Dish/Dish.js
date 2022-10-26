@@ -10,7 +10,6 @@ import Modal from "react-modal";
 const Dish = ({user, lastRestaurant}) => {
   let { id } = useParams();
   let [isOpen, setIsOpen] = useState(false)
-  // console.log('last rest', lastRestaurant)
 
   const toggleModal = () => {
     setIsOpen(!isOpen)
