@@ -50,6 +50,7 @@ Visit our published Heat-Check page [here]( https://heatcheck-fe.herokuapp.com/)
   - Type $ npm start, This runs the app in the development mode
   - Open http://localhost:3000 in your browser to view Heat Check
   - Once you are done using Heat Check, make sure to type Control + C in your terminal stop the server
+  - Note: In Heat Check, userid for login is: 1, 2, or 3
 
 ## Organizational Resources
 - [MiroBoard](https://miro.com/app/board/uXjVPO-BUOo=/)

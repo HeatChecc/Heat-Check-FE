@@ -28,7 +28,14 @@ describe('empty spec', () => {
       cy.get('input[name="idInput"]').type('1')
       cy.get('.logInButton').click({ force: true }).wait(1000)
       cy.get('.signInButton').should('not.exist')
-      // cy.get(".welcome").contains("Welcome, Eli")
+      cy.get(".userName").contains("Welcome, eli")
+    })
+
+    it('should return an error message if log in id is incorrect', () => {
+      cy.get('.signInButton').click().wait(1000)
+      cy.get('input[name="idInput"]').type('example')
+      cy.get('.logInButton').click({ force: true }).wait(1000)
+      cy.get('.errorText').contains('*error... please refresh page*')
     })
 
     it('should allow a user to log out', () => {
@@ -36,9 +43,14 @@ describe('empty spec', () => {
       cy.get('.signInButton').click().wait(1000)
       cy.get('input[name="idInput"]').type('1')
       cy.get('.logInButton').click({ force: true }).wait(1000)
-      // cy.get(".welcome").contains("Welcome, Eli")
+      cy.get(".userName").contains("Welcome, eli")
       cy.get('.signOutButton').click().wait(1000)
       cy.get('.singOutButton').should("not.exist")
+    })
+  
+    it('should display a error message if user does not input an address, city, or zip code', () => {
+      cy.get(".searchButton").click()
+      cy.get(".addressErrorMsg").contains("Please enter a valid city, address or zip code!")
     })
 
   })

@@ -27,6 +27,7 @@ input {
     border: 1px solid #FFFFFF;
     background-color: black;
     color: white;
+    border-radius: 10px;
 }
 
 .searchButton {

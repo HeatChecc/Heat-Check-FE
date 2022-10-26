@@ -18,6 +18,7 @@ const Login = ({signIn, setSignIn, setUser}) => {
   function LoginForm() {
     const [userIdInput, setUserIdInput] = useState('')
     const [getUser, { loading, error }] = useLazyQuery(USER_CHECK);
+    // const [errorMessage, setErrorMessage] = useState('')
 
     const loginSubmit = (event) => {
       event.preventDefault()
@@ -27,14 +28,18 @@ const Login = ({signIn, setSignIn, setUser}) => {
       getUser({ variables: {
         id: parseInt(userIdInput)
       }}).then(res => { 
+        console.log('res', res)
+        if (res.error) {
+          return // setErrorMessage(res.error)
+        }
         setUser(res.data)
         setSignIn(true)
         setIsOpen(false)
       })
     }
   
-    if (loading) return <p>Loading ...</p>;
-    if (error) return `Error! ${error}`;
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p className='errorText'> *error... please refresh page* </p>;
   
     return (
       <div>

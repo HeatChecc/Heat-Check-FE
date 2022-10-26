@@ -23,13 +23,20 @@ describe('The Search Page', () => {
     cy.get('.restaurant').should("have.length", 20)
   })
 
-  it('Should have Himalayan Spice as the first resturant', () => {
+  it('should show an error if there is a network error', () => {
+    cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, {
+      statusCode: 404
+    })
+    .get("p").contains("Error :(")
+  })
+
+  it('Should have Himalayan Spice as the first restaurant', () => {
     cy.get('.restaurant').first().contains("Himalayan Spice")
       .get(".restRating").contains("Rating: 4.5")
       .get(".restaurantImage").first().should('have.attr', 'src').should('include', "https://s3-media2.fl.yelpcdn.com/bphoto/swlTvEXL5yVRzlOPWo4tYw/o.jpg")
   })
 
-  it("should have Mehak India's Aroma as the last resturant", () => {
+  it("should have Mehak India's Aroma as the last restaurant", () => {
     cy.get(".restaurant").last().contains("Mehak India's Aroma")
       .get(".restRating").contains("Rating: 4.5")
       .get(".restaurantImage").last().should('have.attr', 'src').should('include', "https://s3-media1.fl.yelpcdn.com/bphoto/CzbzAT1SD9exma35ESPBUQ/o.jpg")
@@ -40,7 +47,7 @@ describe('The Search Page', () => {
     cy.get(".mapboxgl-canvas").should('exist')
   })
 
-  it("Once in map view, should be able to view restaurant pop up on marker", () => {
+  it.only("Once in map view, should be able to view restaurant pop up on marker", () => {
     cy.get(".mapButton").click()
     cy.get(".mapboxgl-canvas").should('exist')
     cy.get(".popupMarker").first().click()
