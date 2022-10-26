@@ -32,6 +32,7 @@
     height: 25px;
     width: 95px;
     align-self: flex-start;
+    border-radius: 5px;
 }
 
 .myoverlay {
