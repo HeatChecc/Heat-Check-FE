@@ -26,7 +26,7 @@ describe('The Dish Page', () => {
         cy.get('.dishName').contains('pad thai')
     })
 
-    it.only('should render text if there are no current reviews for dish', () => {
+    it('should render text if there are no current reviews for dish', () => {
         cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review3).as("getReview3")
         cy.get('.review').should('have.length', 0)
         cy.get('.noReviewText').contains('No reviews yet.')
