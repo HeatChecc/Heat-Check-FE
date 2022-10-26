@@ -82,7 +82,7 @@ describe('The Single Restaurant Page', () => {
       .get(".exitModalImage").should('not.exist')
   })
 
-  it.only("should be able to delete a dish", () => {
+  it("should be able to delete a dish", () => {
     cy.get('.signInButton').click().wait(1000)
     cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User).as('getUser')    
     cy.get('input[class*="loginInput"]').type('1')
