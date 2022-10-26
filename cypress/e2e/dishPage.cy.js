@@ -6,8 +6,8 @@ import Search from '../fixtures/Search.json'
 
 describe('The dish page', () => {
     beforeEach(() => {
-        cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Search)
-        cy.visit('localhost:3000/search/Denver')
+        cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, Review)
+        cy.visit('http://localhost:3000/dish/25')
     })
 
     it('should have a header', () => {
@@ -18,9 +18,18 @@ describe('The dish page', () => {
 
     it('should have a sidebar', () => {
         cy.get(".sideBar")
-        .get(".sideButton").should("have.length", 3)
+        .get(".sideButton").should("have.length", 2)
         .get(".sideButton").first().contains("Homepage")
         .get(".sideButton").last().contains("About Heat Check")
+    })
+
+    it('should be able to render the dish name', () => {
+        cy.get('.dishName').contains('pad thai')
+    })
+
+    it('should be able to render existing reviews of dish', () => {
+        cy.get('.reviewDetails').first().contains('merp')
+        cy.get('.reviewDetails').last().contains('it was meh')
     })
 
     it('should show an error if there is a network error', () => {
@@ -29,7 +38,6 @@ describe('The dish page', () => {
         })
         .get("p").contains("Error :(")
       })
-
 
 })
 
