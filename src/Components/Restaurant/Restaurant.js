@@ -3,7 +3,6 @@ import { gql, useQuery} from '@apollo/client'
 import "./Restaurant.css"
 import { useParams } from 'react-router-dom'
 import NewDishReviewForm from '../NewDishReviewForm/NewDishReviewForm';
-import OldDishReviewForm from '../OldDishReviewForm/OldDishReviewForm';
 import DishCard from '../DishCard/DishCard';
 import Modal from "react-modal";
 import Loading from '../Loading/Loading'
@@ -13,8 +12,6 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   setRestaurantInApp(id)
   const [newDishes, setNewDishes] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [showOldForm, setShowOldForm] = useState(false)
-  const [oldDishObject, setOldDishObject] = useState({})
   const [isOpen, setIsOpen] = useState(false);
 
   const GET_RESTAURANT = gql`
@@ -48,25 +45,6 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
     }
   `;
 
-  const GET_DISH_REVIEWS = gql`
-  query Dish($id: ID! ) {
-    dish(id: $id) {
-      id
-      name
-      cuisineType
-      yelpId
-      spiceRating
-      reviews {
-        id
-        description
-        overallRating
-        userId
-        dishId
-      }
-    }
-  }
-  `;
-
   const addDishToArray = (newDish) => {
     setNewDishes([...newDishes, newDish])
   }
@@ -77,19 +55,13 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   }
 
   const dishCards = newDishes.map(dish => {
-    const { name, spiceRating, description } = dish
+    const { name, spiceRating, reviews } = dish
     return <DishCard
-      key={dish.id}
       dishId={dish.id}
       name={name}
       user={user}
       rating={spiceRating}
-      description={description}
-      setShowOldForm={setShowOldForm}
-      setShowForm={setShowForm}
-      setOldDishObject={setOldDishObject}
-      toggleModal={toggleModal}
-      getDishReviews={GET_DISH_REVIEWS}
+      reviews={reviews}
       getRestaurant={GET_RESTAURANT}
       restaurantId={id}
     />
@@ -118,19 +90,12 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
               closeTimeoutMS={500}
             >
               {showForm && <NewDishReviewForm
-                id={id}
+                restaurantId={id}
                 user={user}
                 addDishToArray={addDishToArray}
                 setShowForm={setShowForm}
                 category={data.restaurant.categories}
                 getRestaurant={GET_RESTAURANT}
-                toggleModal={toggleModal} />}
-              {showOldForm && <OldDishReviewForm
-                id={id}
-                oldDishObject={oldDishObject}
-                user={user}
-                setShowOldForm={setShowOldForm}
-                getDishReviews={GET_DISH_REVIEWS}
                 toggleModal={toggleModal} />}
             </Modal>
           </div>

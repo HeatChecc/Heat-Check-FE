@@ -1,34 +1,70 @@
-import React from 'react'
-import {useQuery} from '@apollo/client'
+import React, { useState } from 'react'
+import { gql, useQuery} from '@apollo/client'
+import { useParams } from 'react-router-dom'
 import "./Dish.css"
 import Loading from '../Loading/Loading'
+import OldDishReviewForm from '../OldDishReviewForm/OldDishReviewForm'
 import Review from '../Review/Review'
+import Modal from "react-modal";
 
-const Dish = ({dishId, name, toggleDishModal, setDishNameClicked, getDishReviews}) => {
+const Dish = ({user}) => {
+  let { id } = useParams();
+  let [isOpen, setIsOpen] = useState(false)
 
-  const setDefault = () => {
-    toggleDishModal()
-    setDishNameClicked(false)
+  const toggleModal = () => {
+    setIsOpen(!isOpen)
   }
 
+  const GET_DISH_REVIEWS = gql`
+  query Dish($id: ID! ) {
+    dish(id: $id) {
+      id
+      name
+      cuisineType
+      yelpId
+      spiceRating
+      reviews {
+        id
+        description
+        overallRating
+        userId
+        dishId
+      }
+    }
+  }
+  `;
+
   function DishComponent() {
-    const { loading, error, data } = useQuery(getDishReviews, {variables: {id: dishId}});
+    const { loading, error, data } = useQuery(GET_DISH_REVIEWS, {variables: {id: id}});
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
 
     const reviewCards = data.dish.reviews.map(review => {
-      const {description, overallRating, id} = review
-      return <Review key={id} description={description} overallRating={overallRating}/>
+      const {description, overallRating, id, userId} = review
+      return <Review key={id} description={description} overallRating={overallRating} userId={userId}/>
     })
 
     return (
       <div className='dishDetails'>
-        <button className='backButton' onClick={() => setDefault()}>Go Back</button>
-        <h2 className='dishName'>{name}</h2>
+        <h2 className='dishName'>{data.dish.name}{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</h2>
         <h2 className='reviewsHeader'>Customer Reviews</h2>
         <div className='reviewsContainer'>
-          {reviewCards}
+          {data.dish.reviews.length !== 0 ? reviewCards : <><p>No reviews yet.</p>{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</>}
         </div>
+        <Modal
+              isOpen={isOpen}
+              onRequestClose={toggleModal}
+              contentLabel="My dialog"
+              className="mymodal"
+              overlayClassName="myoverlay"
+              closeTimeoutMS={500}
+            >
+        <OldDishReviewForm
+    id={id}
+    user={user}
+    toggleModal={toggleModal}
+    getDishReviews={GET_DISH_REVIEWS} />
+        </Modal>
       </div>
     )
   }

@@ -4,7 +4,7 @@ import "./OldDishReviewForm.css"
 import bathroomLogo from "../Images/gotta-go2.png"
 import Loading from '../Loading/Loading'
 
-const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal, user, getDishReviews }) => {
+const OldDishReviewForm = ({ id, user, getDishReviews, toggleModal }) => {
 
   const ADD_REVIEW_TO_DISH = gql`
   mutation AddReview ($description: String!, $overallRating: Int!, $userId: ID!, $dishId: ID!){
@@ -31,7 +31,7 @@ const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal, user, g
       refetchQueries: [
         {query: getDishReviews,
           variables:{
-            id: oldDishObject.dishId
+            id: id
           }}
       ],
     })
@@ -48,9 +48,8 @@ const OldDishReviewForm = ({ oldDishObject, setShowOldForm, toggleModal, user, g
         description: description,
         overallRating: rating,
         userId: user.id,
-        dishId: oldDishObject.dishId
+        dishId: id,
       }})
-      setShowOldForm(false)
       toggleModal()
     }
 

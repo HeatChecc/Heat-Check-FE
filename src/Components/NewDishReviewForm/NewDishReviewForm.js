@@ -4,7 +4,7 @@ import { gql, useMutation} from '@apollo/client'
 import Loading from '../Loading/Loading'
 import "./NewDishReview.css"
 
-const NewDishReviewForm = ({id, addDishToArray, setShowForm, toggleModal, user, category, getRestaurant}) => {
+const NewDishReviewForm = ({restaurantId, addDishToArray, setShowForm, toggleModal, user, category, getRestaurant}) => {
 
   const ADD_DISH = gql`
   mutation AddDish($name: String!, $cuisineType: String!, $yelpId: String!, $spiceRating: Int!){
@@ -31,7 +31,7 @@ function Form() {
     refetchQueries: [
       {query: getRestaurant,
         variables:{
-          yelp_id: id
+          yelp_id: restaurantId
         }}
     ],
   })
@@ -47,7 +47,7 @@ function Form() {
     addDish({ variables: {
       name: dishName,
       cuisineType: category,
-      yelpId: id,
+      yelpId: restaurantId,
       spiceRating: rating
     }})
     setShowForm(false)

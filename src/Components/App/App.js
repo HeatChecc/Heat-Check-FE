@@ -26,7 +26,7 @@ const App = () => {
         <Route exact path="/" element={<Homepage />} />
         <Route path="/search/:id" element={<RestaurantsContainer setSearch={setSearch} />} />
         <Route path="/restaurant/:id" element={<Restaurant setRestaurantInApp={setRestaurantInApp} user={user.user || {}} />} />
-        <Route path="/dish/:id" element={<Dish />} />
+        <Route path="/dish/:id" element={<Dish user={user.user || {}}/>} />
         <Route path="/about-heat-check" element={<AboutHeatCheck /> } />
       </Routes>
     </div>
