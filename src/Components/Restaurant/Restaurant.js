@@ -69,7 +69,6 @@ const Restaurant = ({ setRestaurantInApp, user }) => {
   
     if (loading) return <Loading />;
     if (error) return <p>Error :(</p>;
-    // console.log(data.restaurant.dishes)
     setNewDishes(data.restaurant.dishes)
     return(
       <>

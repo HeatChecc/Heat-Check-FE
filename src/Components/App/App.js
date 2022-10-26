@@ -8,7 +8,6 @@ import Dish from '../Dish/Dish';
 import SideContainer from '../SideContainer/SideContainer';
 import Header from '../Header/Header';
 import AboutHeatCheck from '../AboutHeatCheck/AboutHeatCheck';
-// import NewDishReviewForm from '../NewDishReviewForm/NewDishReviewForm';
 
 const App = () => {
   const [search, setSearch] = useState("")
@@ -16,7 +15,6 @@ const App = () => {
   const [user, setUser] = useState({})
   const [signIn, setSignIn] = useState(false)
   const location = useLocation()
-  // const [dish, setDish] = useState("")
 
   return (
     <div className="App">
@@ -26,7 +24,7 @@ const App = () => {
         <Route exact path="/" element={<Homepage />} />
         <Route path="/search/:id" element={<RestaurantsContainer setSearch={setSearch} />} />
         <Route path="/restaurant/:id" element={<Restaurant setRestaurantInApp={setRestaurantInApp} user={user.user || {}} />} />
-        <Route path="/dish/:id" element={<Dish user={user.user || {}} lastRestaurant={restaurantInApp}/>} />
+        <Route path="/dish/:id" element={<Dish user={user.user || {}} />} />
         <Route path="/about-heat-check" element={<AboutHeatCheck /> } />
       </Routes>
     </div>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import "./SideContainer.css"
 
 const SideContainer = ({ search, restaurantInApp, user}) => {
-    //add conidtional rendering to not show restaurant button if search is not defined
   return (
     <div className='sideBar'>
       {user.user ? <h2 className='welcome'>Welcome, {user.user.username}!</h2> : <></>}

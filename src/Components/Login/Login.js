@@ -18,7 +18,6 @@ const Login = ({signIn, setSignIn, setUser}) => {
   function LoginForm() {
     const [userIdInput, setUserIdInput] = useState('')
     const [getUser, { loading, error }] = useLazyQuery(USER_CHECK);
-    // const [errorMessage, setErrorMessage] = useState('')
 
     const loginSubmit = (event) => {
       event.preventDefault()
@@ -28,9 +27,8 @@ const Login = ({signIn, setSignIn, setUser}) => {
       getUser({ variables: {
         id: parseInt(userIdInput)
       }}).then(res => { 
-        console.log('res', res)
         if (res.error) {
-          return // setErrorMessage(res.error)
+          return 
         }
         setUser(res.data)
         setSignIn(true)

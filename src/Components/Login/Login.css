@@ -1,5 +1,6 @@
-/* .loginForm {
-} */
+.loginInput {
+  z-index: 5;
+}
 
 .loginModal {
   background-color: white;

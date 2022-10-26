@@ -1,9 +1,8 @@
 .mo-fire {
     height: auto;
     position: fixed;
-    left: 250px;
     bottom: -50px;
-    z-index: 3;
+    z-index: 1;
   }
   
   #svg-view {

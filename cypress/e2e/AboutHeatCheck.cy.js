@@ -3,7 +3,7 @@ describe('The About Heat Check page', () => {
         cy.visit('http://localhost:3000/about-heat-check')
     })
 
-    it.only('should render all the correct elements', () => {
+    it('should render all the correct elements', () => {
         cy.get('.aboutHeatCheck').should('exist')
         cy.get('.aboutHeatCheckTitle').contains('About Heat Check')
         cy.get('ul').should('have.length', 7)

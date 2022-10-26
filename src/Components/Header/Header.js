@@ -5,7 +5,6 @@ import {Link, useLocation} from 'react-router-dom'
 
 const Header = ({signIn, setSignIn, setUser, user}) => {
   const location = useLocation()
-  console.log('user', user)
   return (
     <div className='heatCheckHeader'>
         {location.pathname !== "/" && <div className='heatCheckHeader'> <Link className='headerLink' to={"/"}> <h2 id="heat">HEAT</h2></Link> <Link className='headerLink' to={"/"}><h2 id="check">CHECK</h2></Link></div>}
