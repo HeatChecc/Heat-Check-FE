@@ -21,7 +21,7 @@ const Review = ({description, overallRating}) => {
   return (
   <div className='review'>
     <div className='reviewDetails'>
-    <p className='reviewDescription'>{description}</p> <p>rating:{printPeppers()}</p>
+    <p className='reviewDescription'>{description}</p> <p className='peppers'>rating:{printPeppers()}</p>
     </div>
   </div>
   )

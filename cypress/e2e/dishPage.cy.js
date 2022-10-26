@@ -1,6 +1,7 @@
 import Restaurant from '../fixtures/Restaurant.json'
 import Restaurant2 from "../fixtures/Restaurant2.json"
 import Review from "../fixtures/Review.json"
+import Review2 from "../fixtures/Review2.json"
 import User from "../fixtures/User.json"
 import Search from '../fixtures/Search.json'
 
@@ -28,9 +29,30 @@ describe('The dish page', () => {
     })
 
     it('should be able to render existing reviews of dish', () => {
+        // cy.get('.reviewsContainer').should('have.length', 2)
         cy.get('.reviewDetails').first().contains('merp')
+        cy.get('.peppers').first().should('have.length', 1)
         cy.get('.reviewDetails').last().contains('it was meh')
+        cy.get('.peppers').first().should('have.length', 1)
     })
+
+    it.only("should be able to add a new dish review", () => {
+        cy.get('.signInButton').click().wait(1000)
+        cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User).as('getUser')       
+        cy.get('input[class*="loginInput"]').type('1')
+        cy.get('.logInButton').click({ force: true })
+        .wait('@getUser')
+        cy.get(".reviewFormButton").click({ force: true })
+        cy.intercept('https://heatcheck-be.herokuapp.com/graphql', Review2).as("getReview2")
+        .get('input[class*="dishReviewInput"]').type('pedas!').should('have.value', 'pedas!')
+        .get('.womboCombo').click()
+        .get(".submitNewReviewButton").click().wait(1000)
+        // cy.get('.reviewsContainer').should('have.length', 3)
+        cy.get('.reviewDetails').first().contains('merp')
+        cy.get('.peppers').first().should('have.length', 1)
+        cy.get('.reviewDetails').last().contains('pedas!')
+        cy.get('.peppers').first().should('have.length', 1)
+      })
 
     it('should show an error if there is a network error', () => {
         cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, {
@@ -38,6 +60,7 @@ describe('The dish page', () => {
         })
         .get("p").contains("Error :(")
       })
+
 
 })
 
