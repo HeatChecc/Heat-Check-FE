@@ -29,7 +29,7 @@ describe('empty spec', () => {
     it('should allow a user to log in', () => {
       cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
       cy.get('.signInButton').click().wait(1000)
-      cy.get('input[name="idInput"]').type('1')
+      cy.get('input[class*="loginInput"]').type('1', {force: true})
       cy.get('.logInButton').click({ force: true }).wait(1000)
       cy.get('.signInButton').should('not.exist')
       cy.get(".userName").contains("Welcome, eli")
@@ -37,7 +37,7 @@ describe('empty spec', () => {
 
     it('should return an error message if log in id is incorrect', () => {
       cy.get('.signInButton').click().wait(1000)
-      cy.get('input[name="idInput"]').type('example')
+      cy.get('input[class*="loginInput"]').type('example', {force: true})
       cy.get('.logInButton').click({ force: true }).wait(1000)
       cy.get('.errorText').contains('*error... please refresh page*')
     })
@@ -45,7 +45,7 @@ describe('empty spec', () => {
     it('should allow a user to log out', () => {
       cy.intercept(`https://heatcheck-be.herokuapp.com/graphql`, User)      
       cy.get('.signInButton').click().wait(1000)
-      cy.get('input[name="idInput"]').type('1')
+      cy.get('input[class*="loginInput"]').type('1', {force: true})
       cy.get('.logInButton').click({ force: true }).wait(1000)
       cy.get(".userName").contains("Welcome, eli")
       cy.get('.signOutButton').click().wait(1000)

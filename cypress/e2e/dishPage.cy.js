@@ -23,7 +23,7 @@ describe('The Dish Page', () => {
     })
 
     it('should be able to render the dish name', () => {
-        cy.get('.dishName').contains('pad thai')
+        cy.get('.dish').contains('pad thai')
     })
 
     it('should render text if there are no current reviews for dish', () => {
