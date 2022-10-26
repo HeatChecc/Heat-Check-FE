@@ -47,12 +47,11 @@ describe('The Search Page', () => {
     cy.get(".mapboxgl-canvas").should('exist')
   })
 
-  it.only("Once in map view, should be able to view restaurant pop up on marker", () => {
+  it("Once in map view, should be able to view restaurant pop up on marker", () => {
     cy.get(".mapButton").click()
     cy.get(".mapboxgl-canvas").should('exist')
     cy.get(".popupMarker").first().click()
     cy.get('.popupDetails').contains("Himalayan Spice")
-    // cy.get(".popName").click()
   })
 
 })

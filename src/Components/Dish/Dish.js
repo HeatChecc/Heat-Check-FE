@@ -49,7 +49,7 @@ const Dish = ({user}) => {
         <h2 className='dishName'>{data.dish.name}{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</h2>
         <h2 className='reviewsHeader'>Customer Reviews</h2>
         <div className='reviewsContainer'>
-          {data.dish.reviews.length !== 0 ? reviewCards : <><p>No reviews yet.</p>{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</>}
+          {data.dish.reviews.length !== 0 ? reviewCards : <><p className='noReviewText'>No reviews yet.</p>{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</>}
         </div>
         <Modal
               isOpen={isOpen}

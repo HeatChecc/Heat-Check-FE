@@ -3,9 +3,10 @@ describe('The About Heat Check page', () => {
         cy.visit('http://localhost:3000/about-heat-check')
     })
 
-    it('should render all the correct elements', () => {
+    it.only('should render all the correct elements', () => {
         cy.get('.aboutHeatCheck').should('exist')
-        cy.get('.teams-style').first().should('have.length', 1)
+        cy.get('.aboutHeatCheckTitle').contains('About Heat Check')
+        cy.get('ul').should('have.length', 7)
     })
 
     it('should have a sidebar', () => {
