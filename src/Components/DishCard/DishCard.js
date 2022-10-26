@@ -8,17 +8,36 @@ import Loading from '../Loading/Loading';
 const DishCard = ({ dishId, name, rating, getRestaurant, reviews, user, restaurantId }) => {
 
   const printPeppers = () => {
-    if (rating === 1) {
-      return <>🌶</>
-    } else if (rating === 2) {
-      return <>🌶🌶</>
-    } else if (rating === 3) {
-      return <>🌶🌶🌶</>
-    } else if (rating === 4) {
-      return <>🌶🌶🌶🌶</>
-    }
-    else if (rating === 5) {
-      return <>🌶🌶🌶🌶🌶</>
+    console.log(rating)
+    let spiceRatingIndex;
+    if(reviews.length > 0) {
+      spiceRatingIndex = Math.floor(Math.random() * reviews.length);
+      console.log(reviews[spiceRatingIndex].overallRating)
+      if (reviews[spiceRatingIndex].overallRating === 1) {
+        return <>🌶</>
+      } else if (reviews[spiceRatingIndex].overallRating === 2) {
+        return <>🌶🌶</>
+      } else if (reviews[spiceRatingIndex].overallRating === 3) {
+        return <>🌶🌶🌶</>
+      } else if (reviews[spiceRatingIndex].overallRating === 4) {
+        return <>🌶🌶🌶🌶</>
+      }
+      else if (reviews[spiceRatingIndex].overallRating === 5) {
+        return <>🌶🌶🌶🌶🌶</>
+      }
+    } else {
+      if (rating === 1) {
+        return <>🌶</>
+      } else if (rating === 2) {
+        return <>🌶🌶</>
+      } else if (rating === 3) {
+        return <>🌶🌶🌶</>
+      } else if (rating === 4) {
+        return <>🌶🌶🌶🌶</>
+      }
+      else if (rating === 5) {
+        return <>🌶🌶🌶🌶🌶</>
+      }
     }
   }
 
@@ -57,7 +76,6 @@ const DishCard = ({ dishId, name, rating, getRestaurant, reviews, user, restaura
   if (error) return <p>Error :(</p>;
 
   const handleClick = () => {
-    console.log('clicked id to delete', dishId)
     deleteDish({
       variables: {
         id: dishId

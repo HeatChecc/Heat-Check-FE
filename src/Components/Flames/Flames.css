@@ -1,7 +1,7 @@
 .mo-fire {
     height: auto;
     position: fixed;
-    left:25%;
+    left: 250px;
     bottom: -50px;
     z-index: 3;
   }

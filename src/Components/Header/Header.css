@@ -6,6 +6,10 @@
     /* width: 100vw; */
 }
 
+.headerLink {
+    text-decoration: none;
+}
+
 #check {
     color: red;
     padding-left: 1%;

@@ -7,9 +7,10 @@ import OldDishReviewForm from '../OldDishReviewForm/OldDishReviewForm'
 import Review from '../Review/Review'
 import Modal from "react-modal";
 
-const Dish = ({user}) => {
+const Dish = ({user, lastRestaurant}) => {
   let { id } = useParams();
   let [isOpen, setIsOpen] = useState(false)
+  // console.log('last rest', lastRestaurant)
 
   const toggleModal = () => {
     setIsOpen(!isOpen)
@@ -46,10 +47,10 @@ const Dish = ({user}) => {
 
     return (
       <div className='dishDetails'>
-        <h2 className='dishName'>{data.dish.name}{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</h2>
+        <h2 className='dish'>{data.dish.name}{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</h2>
         <h2 className='reviewsHeader'>Customer Reviews</h2>
         <div className='reviewsContainer'>
-          {data.dish.reviews.length !== 0 ? reviewCards : <><p>No reviews yet.</p>{user.id && <button className='reviewFormButton' onClick={() => toggleModal()}>Add Review</button>}</>}
+          {data.dish.reviews.length !== 0 ? reviewCards : <p>No reviews yet.</p>}
         </div>
         <Modal
               isOpen={isOpen}
