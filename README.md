@@ -46,7 +46,7 @@
   - Heat Check individual dish page
 
 ## Deployed Page
-    - Visit our published Heat-Check page [here]( https://heatcheck-fe.herokuapp.com/)
+   Visit our published Heat-Check page [here]( https://heatcheck-fe.herokuapp.com/)
 
 ## Possible Future Extensions
     - Getting directions from a specific location to desired spicy restaurant
